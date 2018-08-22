@@ -1,0 +1,45 @@
+
+<!-- Modal -->
+<div class="modal fade" id="msg_form" tabindex="-1" role="dialog" aria-labelledby="Message form" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+               <div class="modal-header">
+                        <h4>Написать сообщение: </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick='hide_modal("msg_form")'>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="form-horizontal modal-body"  role="form" >
+                                        <div class="form-group">        
+                                                <label class="col-sm-4 control-label" for="whom">Кому :</label>
+                                                <div class="col-sm-4">
+                                                <input type="text"  class="form-control" value=""  id="whom">
+                                                </div>       
+                                        </div>
+                
+                                        <div class="form-group">        
+                                                <label class="col-sm-4 control-label"  for="msg">Сообщение :</label>
+                                                <div class="col-sm-10">
+                                                <p>Максимальная длина сообщений 255 символов</p>
+                                                <textarea id="msg" rows="5" cols="40" maxlength="255"
+                                                style="margin: 0px; height: 123px; width: 20empx;"
+                                                >
+                                                
+                                                </textarea>
+                                                </div>       
+                                        </div>
+                                        <div class="form-group">        
+                                                <div class="col-sm-6">
+                                                <button type="button"  class="btn pull-left"  
+                                                onclick="Main.cancel_msg()" >Отменить</button>   
+                                                 <button type="button"  class="btn btn-enter pull-right" 
+                                                 onclick="Main.send_msg()" >Отправить</button>   
+                                                </div>       
+                                        </div>
+                              
+                </div>
+                
+                
+    </div>
+  </div>
+</div>

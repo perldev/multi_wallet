@@ -1,0 +1,49 @@
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <div class="common-block table-list-block">
+                      <h4>Заявки на продажу {{ Currency }}</h4>
+                      <span>Всего: <span class="order-list-total" id="sell_orders_sum">{{sell_orders_sum}}</span> {{ Currency }}</span>
+
+                      <div class="stock-list-table simplebar" id="order-list">
+                        <table class="table table-striped table-responsive-sm">
+                          <thead>
+                            <tr>
+                              <th scope="col">Цена/ед.</th>
+                              <th scope="col text-center">{{Currency}}</th>
+                              <th scope="col">{{Currency1}}</th>
+                            </tr>
+                          </thead>
+                          <tbody id="sell_orders_list">
+
+
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <div class="common-block table-list-block">
+                      <h4>Заявки на покупку {{Currency}}</h4>
+                      <span>Всего: <span class="order-list-total" id="buy_orders_sum">{{buy_orders_sum}}</span> {{Currency1}}</span>
+
+                      <div class="stock-list-table simplebar" id="order-list1">
+                        <table class="table table-striped table-responsive-sm">
+                          <thead>
+                            <tr>
+                              <th scope="col">Цена/ед.</th>
+                              <th scope="col text-center">{{ Currency }}</th>
+                              <th scope="col">{{ Currency1 }}</th>
+                            </tr>
+                          </thead>
+                          <tbody id="buy_orders_list">
+
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>

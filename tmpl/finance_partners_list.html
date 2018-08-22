@@ -1,0 +1,17 @@
+{% extends "base_main_cabinet.html" %}
+
+{% load my_formats %}
+
+
+{% block cabinet_title %}Привлеченные пользователи{% endblock %}
+{% block cabinet_content %}
+ <div class="col-md-12 border_radius" id="transactions_block" >
+                {% include "trans_list.html"%}
+
+                {% include "pagination.html" %}
+                
+                
+</div>          
+{% include "scripts.html"%}
+
+{%endblock%}

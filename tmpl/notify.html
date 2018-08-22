@@ -1,0 +1,46 @@
+{% extends "base_main_cabinet.html" %}
+
+{% load my_formats %}
+
+
+{% block cabinet_title %}Уведомления{% endblock %}
+{% block cabinet_content %}
+ <div class="col-md-12 border_radius" id="transactions_block" >
+                                
+                <table class="table table-hover table-striped"  id='transactions'>
+                <thead>
+                                <tr>
+                                        <th> # </th>
+                                        <th> Дата </th>
+                                        <th> Сообщение </th>
+                                        <th> Действие </th>
+                                        
+                                </tr>
+                </thead>
+                    {% for item in msgs %}
+                        <tr id="notify_{{item.id}}" {% if item.user_seen_to in "false" %}  class="info"  "hip" {% endif %} >
+                                <td>{{item.id}}</td>
+                                <td>
+                                        <small>{{item.pub_date}}</small>
+                                </td>
+                                <td>
+                                        {{item.text}}
+                                        
+                                </td>
+                                <td>
+                                    <span onclick="Main.notify_remove({{item.id}})" class="btn btn-primary btn-xs">Hide</span></td>      
+                                </td>
+                        </tr>
+                {% endfor %}
+                
+                
+                
+                
+                </table>
+                {% include "pagination.html" %}
+                
+                
+</div>          
+{% include "scripts.html"%}
+
+{%endblock%}

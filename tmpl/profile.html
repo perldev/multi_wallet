@@ -1,0 +1,303 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+
+    <div class="static-page-wrapper">   
+
+    <main class="cd-main-content">
+        <nav class="cd-side-nav">
+        </nav>
+
+
+        <div class="container cabinet-main-container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="stock-profile-bar">
+
+                        {% include "side_menu_finance.html" %}
+
+                    </div>
+
+                    <div class="cabinet-page-title">
+                        <h1>Профиль</h1>
+                    </div>
+
+                    <div class="common-block cabinet-content-main-block">   
+                        <div class="row">
+                            <div class="col-12 profile-info-line">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4 col-xs-12">
+                                        <span class="profile-line-title">Пользователь:</span>
+                                    </div>
+                                    <div class="col-md-9 col-sm-8 col-xs-12">
+                                        <span>{{client.username}}</span>
+                                    </div>          
+                                </div>
+                            </div>  
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Класс торговца:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <span>{{ class_value }}</span>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Идентифицикация:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <span>{{ identity_value }}</span>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+{% if is_own_profile %} 
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Дата регистрации:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <span>{{client.date_joined}}</span>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Email:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <span>{{client.email}}</span>
+                                            <small class="text-muted">
+                                                <a href="#" role="button" data-toggle="modal" data-target="#email_change_dlg">Изменить email</a>
+                                            </small>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>                                                                                  
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Двухфакторная авторизация:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <label class="switch">
+                                              <input type="checkbox" id="g2a_setting" onclick="profile.user_g2a('g2a', this)" {% if g2a %} checked {% endif %}  value="yes">
+                                              <span class="slider round"></span>
+                                            </label>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Пароль:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <button class="btn btn-figure-out" onclick="profile.reset_passwd()">Сбросить пароль</button>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">PIN-код:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <button class="btn btn-figure-out" onclick="window.location.href='/profile/pin_change'">Сбросить pin-код</button>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Партнерские ссылки:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <span>Страница регистрации:</span>
+                                            <a href="https://btc-trade.com.ua/registration/{{ partners_value }}">https://btc-trade.com.ua/registration/{{ partners_value }}</a>
+                                            <span>Страница торгов BTC/UAH:</span>
+                                            <a href="https://btc-trade.com.ua/stock/btc_uah?ref={{ partners_value }}">https://btc-trade.com.ua/stock/btc_uah?ref={{ partners_value }}</a>   
+                                            <span>Страница тарифов:</span>
+                                            <a href="https://btc-trade.com.ua/page/fees?ref={{ partners_value }}">https://btc-trade.com.ua/page/fees?ref={{ partners_value }}</a>   
+                                            <span>Страница главная:</span>
+                                            <a href="https://btc-trade.com.ua/index.html?ref={{ partners_value }}">https://btc-trade.com.ua/index.html?ref={{ partners_value }}</a>                                             
+
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Тариф сделок:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <span>{{ deal_comission_value }}%</span>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Подключение API и дополнительных приложений:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <button class="btn btn-figure-out" onclick="window.location.href='/profile/private_key_choose'">Показать</button>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Уведомлять на email о новостях проекта:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <label class="switch">
+                                              <input type="checkbox" onclick="profile.user_setting('news_notify', this)"
+                                                                        {% if news_notify %} checked {% endif %}  value="yes">
+                                              <span class="slider round"></span>
+                                            </label>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Уведомлять на email об авторизации:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <label class="switch">
+                                              <input type="checkbox" onclick="profile.user_setting('auth_notify', this)"
+                                                                        {% if auth_notify %} checked {% endif %}  value="yes" >
+                                              <span class="slider round"></span>
+                                            </label>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Уведомлять на email о выводе средств:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <label class="switch">
+                                              <input type="checkbox" onclick="profile.user_setting('withdraw_notify', this)"
+                                                                        {% if withdraw_notify %} checked {% endif %} value="yes">
+                                              <span class="slider round"></span>
+                                            </label>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Уведомлять на email о пополнение средств:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <label class="switch">
+                                              <input type="checkbox" onclick="profile.user_setting('deposit_notify', this)"
+                                                                        {% if deposit_notify %} checked {% endif %} value="yes" >
+                                              <span class="slider round"></span>
+                                            </label>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+                            <div class="col-12">
+                                <div class="profile-info-line-inner">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12">
+                                            <span class="profile-line-title">Уведомлять на email о текущем курсе:</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12">
+                                            <label class="switch">
+                                              <input type="checkbox" onclick="profile.user_setting('rate_notify', this)"
+                                                                       {% if rate_notify %} checked {% endif %} value="yes">
+                                              <span class="slider round"></span>
+                                            </label>
+                                        </div>          
+                                    </div>
+                                </div>
+                            </div>  
+
+{%else%}
+
+                            <div>
+                             <span class="btn btn-default" onclick="Main.create_msg('{{client.username}}')"  > Написать сообщение</span>
+                            </div>                      
+
+{%endif%}
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main> <!-- .cd-main-content -->
+
+    </div><!--END of MAIN WRAPPER-->    
+
+{% include "msg_form.html" %}
+
+
+       {% include "scripts.html"%}
+       {% include "g2a.html"%}
+       {% include "email_change_dlg.html" %}
+       
+       {% include "custom_action_f2a.html" %}
+
+
+
+{%endblock%}

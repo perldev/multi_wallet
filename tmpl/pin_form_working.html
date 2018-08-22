@@ -1,0 +1,47 @@
+{% extends "base_main_cabinet.html" %}
+
+{% load my_formats %}
+
+
+{% block cabinet_title %}Персональный PIN-код{% endblock %}
+{% block cabinet_content %}
+
+        <div class="col-sm-10  form-page-col">
+                <p class="help-block">
+                {% autoescape off %} 
+                                {{common_help_text}}
+                {% endautoescape %}                
+    
+                </p>
+        
+                <form class="form-horizontal" action="{{action}}" id="simple_form" role="form" method="POST" >                   
+                        {{ form }}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-enter">{{action_title}}</button>
+                            </div>
+                        </div>
+                </form>                       
+                
+        </div>  
+
+
+{%endblock%}
+
+{% block scripts %}
+  
+  {% if pin_load %}
+   <script>
+         
+          Pins.attach2pin("id_pin", "container_pin");
+
+   
+   </script>
+  {% endif %} 
+  {% if use_f2a %}
+   <script>
+                          
+   </script>
+  {% endif %} 
+
+{% endblock %}

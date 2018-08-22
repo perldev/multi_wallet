@@ -1,0 +1,97 @@
+{% extends "base_main.html" %} {% load my_formats %} {% block content %}
+<div class="static-page-wrapper">
+  <main class="cd-main-content">
+    <nav class="cd-side-nav">
+    </nav>
+
+    <div class="container cabinet-main-container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="stock-profile-bar">
+
+            {% include "side_menu_finance.html" %}
+
+          </div>
+
+          <div class="cabinet-page-title">
+            <h1>Финансы</h1>
+          </div>
+
+          <div class="common-block cabinet-content-main-block">
+            <div class="row">
+              <div class="col-md-12 main">
+                <h1 class="page-header">{{title}}
+                </h1>
+                <!-- deals -->
+                <div class="col-md-8 offset-md-2 deals border_radius padding20 registration">
+
+                  <div class="col-md-12">
+                    <p class="help-block">
+                      {% autoescape off %} {{common_help_text}} {% endautoescape %}
+                    </p>
+                    {% if simple_msg %}
+                        <p style="color: red"> {{ simple_msg }}
+                        </p>
+                    {% endif %}
+                    <form class="form-horizontal" action="{{action}}" id="simple_form" role="form" method="POST">
+                      {{ form }}
+                      <div class="form-group">
+
+                        <div id="simple_form_submit" class="btn-group col-sm-offset-2 col-sm-12">
+                          <div class="float-sm-right"><button type="submit" class="btn btn-success float-right">{{action_title}}</button></div>
+                        </div>
+                      </div>
+                    </form>
+
+                  </div>
+
+                </div>
+
+                <!-- deals -->
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Bootstrap core JavaScript ================================================== -->
+          <!-- Placed at the end of the document so the pages load faster -->
+        </div>
+      </div>
+  </main>
+  </div>
+  {%endblock%} {% block scripts %} {% if action = "/finance/crypto_currency_withdraw_submit" %}
+  <script>
+    $(function() {
+      $("#id_amnt_get").prop('disabled', true);
+      var comission = $("#id_comission_withdraw").val();
+      $("#id_amnt").on("keyup", function(ev) {
+        var amnt = $(this).val();
+        var res_amnt = amnt - comission;
+        if (res_amnt < 0) {
+          $("#id_amnt_get").val("0");
+
+        } else {
+          $("#id_amnt_get").val(res_amnt);
+        }
+
+      });
+    });
+  </script>
+  {% endif %} {% if action = "/finance/p2p_transfer_withdraw_submit" %}
+  <script>
+    $(function() {
+      $("#id_amnt_get").prop('disabled', true);
+      $("#id_amnt").on("keyup", function(ev) {
+        var amnt = $(this).val();
+        var res_amnt = amnt * 0.99;
+        if (res_amnt < 0) {
+          $("#id_amnt_get").val("0");
+
+        } else {
+          $("#id_amnt_get").val(res_amnt);
+        }
+
+      });
+    });
+  </script>
+  {% endif %} {% endblock %}

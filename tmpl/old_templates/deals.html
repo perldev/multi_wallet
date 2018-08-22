@@ -1,0 +1,39 @@
+    <div class="col-md-12  border_radius" >
+               <h5 class="sub-header text-info">История сделок</h5> 
+               <h6 class="sub-header text-info hidden" id="date_deals_comp" >C даты:
+                  <input type="text" id="date_deals" value="Сегодня">&nbsp;по:
+                  <input type="text" id="date_deals1" value="По завтра">&nbsp;
+                  Средний курс:&nbsp;<strong id='avarage_rate'></strong>
+                  Сумма покупки:&nbsp;<strong id='sum_buy'></strong>
+                  Сумма продажи:&nbsp;<strong id='sum_sell'></strong>
+
+                  </h6> 
+               
+               <div class="table-responsive">
+                        <table class="table table-striped">
+                        <thead>
+                                <tr>
+                                <th>Дата</th>
+                                <th>Пользователь</th>
+                                <th>Тип</th>
+                                <th>Цена</th>
+                                <th>{{Currency1}}</th>
+                                <th>{{Currency}}</th>
+                                </tr>
+                        </thead>
+                        <tbody id="trade_deals">
+                           <tr><td colspan="5" align="center">
+                                <img src="{{STATIC_SERVER}}processing.gif" /></td></tr>
+                               <!-- {% for item in deals %}
+                                    <tr>    
+                                        <td>{{item.pub_date}}</td>
+                                        <td>{{item.type}}</td>
+                                        <td>{{item.price}} {{Currency1}}</td>
+                                        <td>{{item.amnt_base}}</td>
+                                        <td>{{item.amnt_trade}}</td>
+                                    </tr>
+                                {% endfor %}-->
+                        </tbody>
+                        </table>
+                </div>
+    </div> 

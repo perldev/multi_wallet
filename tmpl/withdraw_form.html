@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div class="modal fade" id="withdraw_form" tabindex="-1" role="dialog" aria-labelledby="Deposit form" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+            <h4>Информация для вывода средств: </h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick='hide_modal("deposit_form")'>
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="col-md-12 cabinet-content-main-block modal-body" >   
+ 
+        <div class="form-horizontal" role="form">
+                                    <div class="form-group">        
+                                            <label class="col-sm-12 control-label" for="currency_withdraw">Валюта :</label>
+                                            <div class="col-sm-12">
+                                            <input type="text" disabled class="form-control" value=""
+                                                id="currency_withdraw" 
+                                                    >
+                                            </div>       
+                                    </div>
+                                    <div class="form-group">
+                                            <label class="col-sm-12 control-label" id="label_provider_withdraw" for="provider_withdraw">
+                                            Способ вывода :</label>
+                                            <div class="col-sm-12">
+                                                    <select class="form-control" id="provider_withdraw" 
+                                                            onchange="finance.change_withdraw(this)">
+                                                            <option value="">
+                                                                    Выбрать
+                                                            </option>
+                                                            <option value="liqpay_transfer">
+                                                                    LiqPay
+                                                            </option>
+                                                            <option value="bank_transfer">
+                                                                    Банковский перевод
+                                                            </option>
+                                                    </select>              
+                                            </div>
+                                    </div>
+                                    <div class="form-group" id="res_provider_withdraw" >
+                                            
+                                                            
+                                    </div>       
+                                
+        </div>
+      </div>     
+    </div>
+  </div>
+</div>

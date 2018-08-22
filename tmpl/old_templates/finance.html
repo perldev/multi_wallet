@@ -1,0 +1,133 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+  <div class="container-fluid">
+      <div class="row">
+                <div class="col-md-9 main" style="min-height:1399px">
+                
+                      {% include "side_menu_finance.html" %}
+                       <div class="col-md-9 ">
+                                <h1 class="page-header">Финансы:</h1>
+                       </div>
+                       
+                        {% include "deposit_form.html" %}
+                        {% include "withdraw_form.html" %}
+                       
+                        <div class="col-md-9 border_radius">
+                                <table class="table table-hover" id='finance'>
+                                        <thead >
+                                                <tr>
+                                                        <th> Валюта </th>
+                                                        <th> Баланс </th>
+                                                        <th class="pull-right"> Действия </th>
+                                                </tr>
+                                        </thead>
+
+                                        {% for account in page_accounts %}
+                            
+                                             {% if False  and  account.currency.title == "BCH" %}
+                                                  <tr>
+                                                        <td><strong>{{account.currency}}</strong></td>
+                                                        <td>
+                                                             {% if settings_bch_approve == "no" %}
+                                                               <button class="btn btn-success pull-right" 
+                                                                onclick="finance_claim.claim_bch_deposit('{{account.currency}}')">Запросить</button></td>
+                                                             {% else %}
+                                                               {{account.balance}}&nbsp;<br/> {%if account.on_orders %} ( <a href='https://btc-trade.com.ua/finance/open_orders/btc_uah'>+ на заявках:</a><strong>{{ account.on_orders }}</strong> ) {% endif %} 
+                                                             {% endif %}
+                                                        <td>
+                                                        
+                                                        <button class="btn btn-success pull-right" 
+                                                                onclick="finance.make_deposit('{{account.currency}}')">Пополнить</button>
+                                                        <button class="btn pull-right" 
+                                                                onclick="finance.withdraw('{{account.currency}}')">Вывести</button>                        
+                                                        
+                                                        </td> 
+
+
+                                                </tr>
+
+
+                                             {% else %}                                                   
+
+  
+
+					         <tr>
+                                                        <td><strong>{{account.currency}}</strong></td>
+                                                        <td>{{account.balance}}&nbsp;<br/> {%if account.on_orders %} ( <a href='https://btc-trade.com.ua/finance/open_orders/btc_uah'>+ на заявках:</a> <strong>{{ account.on_orders }}</strong> ) {% endif %} </td>
+                                                        <td>
+                                                        <button class="btn btn-success pull-right" 
+                                                                onclick="finance.make_deposit('{{account.currency}}')">Пополнить</button>
+							{% if True or account.currency.title != 'USDT' %}												
+                                                        <button class="btn pull-right" 
+                                                                onclick="finance.withdraw('{{account.currency}}')">Вывести</button>                        
+							{% else %}
+                      
+                                                        <button class="btn pull-right" 
+                                                                onclick="exchange.make('{{account.currency.title}}')">Обменять</button>                        
+
+		                                       {% endif %}
+						       	
+                                                        </td> 
+
+
+                                                </tr>
+                                             {% endif %}
+
+                                        {% endfor %}
+                        
+                                </table>
+                        </div>    
+                
+            
+       </div>
+       {% if settings_usd == 'yes' %}
+
+         {% include "usd_exch.html" %}
+         <script src="{{STATIC_SERVER}}js/exchange.js?do=neiuw5218"></script>
+   
+       {% endif %}
+      
+    {% include "scripts.html"%}
+    {% include "custom_action_f2a.html" %}
+
+
+        
+    </div>
+  </div>
+
+<div class="modal modal-fade" id="bch_claim" aria-labelledby="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="modal_title">Запрос баланса BCH</h4>
+      </div>
+
+      <div class="modal-body">
+              <p>
+              Добрый день, ваш баланс BCH на момент форка 1 августа в 17 часов по Киевскому времени:</p>
+              <p><strong id="bch_balance_claim"></strong> BCH</p>
+              <p> если вы согласны с балансом, то нажмите кнопку "Подтвердить", </p>
+              <p>1. Мы начислим Вам ваш баланс <strong>BCH</strong> </p>
+              <p>2. Мы перегенерируем ваш адрес пополнения <strong>BTC</strong> </p>
+              <p>3. Транзакции на старый адрес BTC  заходить <strong>НЕ БУДУТ</strong> </p>
+              <p> если вы <strong>НЕ согласны</strong> с балансом, обратитесь к нам support@btc-trade.com.ua </p>
+              <br/><br/><br/>
+              <span class="btn btn-success pull-right" 
+                    onclick="finance_claim.approve()" >Подтвердить</span>
+              <span class="btn btn-danger" 
+                    onclick="$('#bch_claim').modal('hide')" >Не согласен</span>
+	
+      </div>
+   </div>
+ </div>
+
+</div>
+
+
+ 
+{%endblock%}

@@ -1,0 +1,104 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+
+
+
+
+  <div class="static-page-wrapper"> 
+
+  <main class="cd-main-content">
+    <nav class="cd-side-nav">
+    </nav>
+
+
+    <div class="container cabinet-main-container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="stock-profile-bar">
+
+          {% include "side_menu_finance.html" %}
+
+          </div>
+
+          <div class="cabinet-page-title">
+            <h1>Cделки IOS</h1>
+          </div>
+
+            <div class="currency-btn-block">
+
+                <div class="d-flex align-content-end flex-wrap">
+                {% for Currency in CurrencyTrade %}
+                                        {% if Currency.url_title == current_stock %}
+                                                    <a href="#" id="stock_{{Currency.url_title}}" class="p-2 bd-highlight active-currency">{{Currency.title}}</a>
+                                        {% else %}
+                                                {% if Currency.is_title %}
+
+                                                {% else %}
+                                                <a href="/finance/deals_partners/{{Currency.url_title}}" 
+                                                id="stock_{{Currency.url_title}}" class="p-2 bd-highlight">{{Currency.title}}</a>
+                                                       
+                                                {% endif %}
+
+                                        {% endif %}
+
+                                {% endfor %}
+                </div>
+            </div>
+
+          <div class="common-block table-list-block cabinet-table-block"> 
+            <div class="row">
+
+
+              <div class="col-12">
+         {% include "deals_ios.html"%}
+              </div>  
+
+                                                                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main> <!-- .cd-main-content -->
+
+  </div><!--END of MAIN WRAPPER-->  
+{%endblock%}
+
+
+{% block scripts%}
+    <script type="text/javascript">
+       function search(){
+
+                thinking_alert();
+                var date1 = $("#date_deals").val();
+                var date2 = $("#date_deals1").val();
+                var type = $("input:radio[name='type']:checked").val();
+                if(!type)
+                  type="";
+                d = window.location.pathname;
+                window.location.href = d+"?date="+date1+"&type="+type+"&date1="+date2;                  
+       }
+
+      (function(){
+
+            $("#date_deals1").datepicker({
+                format: "dd-mm-yyyy"
+            }).on("changeDate", function(e) {
+                $("#date_deals1").datepicker("hide");
+            });
+         
+
+         $("#date_deals").datepicker({
+                format: "dd-mm-yyyy"
+            }).on("changeDate", function(e) {
+                $("#date_deals").datepicker("hide");
+            });
+        })();  
+    </script>
+{% endblock %}
+                        
+

@@ -1,0 +1,175 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+
+
+  <div class="static-page-wrapper">
+
+  <main class="cd-main-content">
+    <nav class="cd-side-nav">
+    </nav>
+
+
+    <div class="container cabinet-main-container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="stock-profile-bar">
+                {% include "side_menu_finance.html" %}
+          </div>
+
+
+          <div class="cabinet-page-title">
+            <h1>Финансы</h1>
+          </div>
+
+          <div class="common-block cabinet-content-main-block">
+            <div class="row">
+              <div class="col-12">
+
+              
+
+
+                <div class="common-block cabinet-content-main-block-finance">
+                    <div class="row">
+
+
+                    <div class="col-12">
+                        <div class="finance-table-header">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                            <span>Валюта</span>
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-12">
+                            <span class="span-balance-in-cabinet">Баланс</span>
+                            </div>
+                            <div class="col-md-8 col-sm-6 col-xs-12 btn-group-col">
+                            <span class="span-balance-in-cabinet">Операции</span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+
+            {% for account in page_accounts %}
+
+              {% if False  and  account.currency.title == "BCH" %}
+
+              <div class="col-12">
+                <div class="profile-info-line-inner">
+                  <div class="row align-items-center">
+
+                    <div class="col-md-2 col-sm-2 col-xs-12">
+                      <span class="profile-line-title">{{account.currency}}</span>
+                    </div>
+
+                    {% if settings_bch_approve == "no" %}
+                      <div class="col-md-2 col-sm-4 col-xs-12">
+                        <button class="btn btn-figure-out"
+                      onclick="finance_claim.claim_bch_deposit('{{account.currency}}')">Запросить</button>
+                      </div>
+                    {% else %}
+                      {{account.balance}}&nbsp;<br/>
+                      {%if account.on_orders %}
+                      ( <a href='https://btc-trade.com.ua/finance/open_orders/btc_uah'>+ на заявках:</a>
+                      <strong>{{ account.on_orders }}</strong> )
+                      {% endif %}
+                    {% endif %}
+
+
+                    <div class="col-md-8 col-sm-6 col-xs-12 btn-group-col">
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary btn-secondary-left" onclick="finance.withdraw('{{account.currency}}')">Вывести</button>
+                        <button type="button" class="btn btn-secondary btn-secondary-right" onclick="finance.make_deposit('{{account.currency}}')">Пополнить</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+              {% else %}
+
+
+              <div class="col-12">
+                <div class="profile-info-line-inner">
+                  <div class="row align-items-center">
+                    <div class="col-md-2 col-sm-2 col-xs-12">
+                      <span class="profile-line-title">{{account.currency}}</span>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                      <span class="span-balance-in-cabinet" id="balance_{{account.currency}}" data-balance="{{ account.balance }}">
+{{account.balance}}&nbsp;<br/> {% if account.on_orders %} ( <a href='https://btc-trade.com.ua/finance/open_orders/btc_uah'>+ на заявках:</a> <strong>{{ account.on_orders }}</strong> ) {% endif %}
+                      </span>
+                    </div>
+                    <div class="col-md-8 col-sm-6 col-xs-12 btn-group-col">
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                      {% if True or account.currency.title != 'USDT' %}
+                        <button type="button" class="btn btn-secondary btn-secondary-left" onclick="finance.get_wallet('{{account.currency}}')">Скачать кошелек</button>
+                        {% else %}
+                        <button type="button" class="btn btn-secondary btn-secondary-left" onclick="exchange.make('{{account.currency.title}}')">Обменять</button>
+                        {% endif %}
+
+                        <button type="button" class="btn btn-secondary btn-secondary-right" onclick="finance.generate_wallets('{{account.currency}}')">Сгенерить кошельки</button>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {% endif %}
+
+              {% endfor %}
+
+
+            </div>
+          </div>
+
+
+
+{% if settings_usd == 'yes' %}
+
+{% include "usd_exch.html" %}
+<script src="{{STATIC_SERVER}}js/exchange.js?do=neiuw5218"></script>
+
+{% endif %}
+
+{% include "scripts.html"%}
+{% include "custom_action_f2a.html" %}
+{% include "deposit_form.html"%}
+{% include "withdraw_form.html"%}
+
+        </div>
+      </div>
+    </div>
+
+  </main> <!-- .cd-main-content -->
+
+  </div><!--END of MAIN WRAPPER-->
+
+
+
+{%endblock%}
+
+{%block scripts%}
+<script>
+    $(document).ready(function(){
+
+        $("#copy_adr").on("click", function(){
+                            $("#crypto_account").select();
+                            document.execCommand("Copy");
+                            alert("Адрес кошелька скопирован в буфер обмена " + $("#crypto_account").val())
+                    });
+        $("#copy_ext").on("click", function(){
+                            $("#crypto_ext_info").select();
+                            document.execCommand("Copy");
+                            alert("Адрес кошелька скопирован в буфер обмена " + $("#crypto_ext_info").val())
+                    });            
+                    
+                    
+    });
+</script>
+{%endblock%}

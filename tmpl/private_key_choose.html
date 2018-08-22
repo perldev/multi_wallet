@@ -1,0 +1,49 @@
+{% extends "base_main_cabinet.html" %}
+
+{% load my_formats %}
+{% load i18n %}
+
+{% block cabinet_title %}Выберите  приложение, которое хотите подключить: {% endblock %}
+{% block cabinet_content %}
+
+
+                            <div class="col-sm">
+                                    <div class="col-12">
+                                    <h4 class="text-left">
+                                       Приложение для <a target="blank" href="https://play.google.com/store/apps/details?id=multico.in.btctrade">Android</a>
+                                    </h4>
+                                    </div>                                 
+                                    <div class="col-md-6 offset-md-3">
+                                        <br/>                
+                                        <br/>                
+
+                                        <a class="btn btn-primary"  href="{% url 'page_private_key_android' %}"><img class="img-fluid" src="/static/images/android.png"/></a>
+                                    </div>
+                            </div>
+                            <div class="col-sm">
+                                    <div class="col-12">
+                                    <h4>
+                                         Приложение для <a target="blank" href="https://itunes.apple.com/ua/app/btc-trade-ukraine/id1359815912?l=ru&amp;mt=8">IPhone</a>
+                                    </h4>
+                                    </div>
+                                    <div class="col-6  offset-md-3">
+                                        <br/>                
+                                        <br/>                
+                                        <a class="btn btn-primary" href="{% url 'page_private_key_ios' %}"> <img class="img-fluid" src="/static/images/ios.png"/></a>
+                                    </div>
+                            </div>
+                            <div class="col-sm">
+                                    <div class="col-12">
+                                    <h4>
+                                       Другие приложения &amp; API
+                                    </h4>
+                                    </div>
+                                    <div class="col-6  offset-md-3">
+                                        <br/>                
+                                        <br/>                
+                                            <a class="btn btn-primary" href="{% url 'page_private_key' %}"><img class="img-fluid" src="/static/images/web.png"/></a>
+                                    </div>
+                            </div>
+
+{%endblock%}
+               

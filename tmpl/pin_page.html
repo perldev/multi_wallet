@@ -1,0 +1,42 @@
+{% extends "base_main_cabinet.html" %}
+
+{% load my_formats %}
+
+
+{% block cabinet_title %}Персональный PIN-код{% endblock %}
+{% block cabinet_content %}
+
+<div class="col-sm-12  form-page-col help_box">
+                             <h3><strong>Внимание!!!</strong> Что бы видеть PIN код вы должны быть авторизированы</h3>
+                              <p class="help-box centering" >
+                                 <img src="/pin_image/{{pin}}"/>
+                             </p>
+                             <p class="help-box centering">Мы сгенерировали вам персональный PIN код, для того, что бы максимально 
+                             обезопасить ваши средства.
+                             
+                                Для большей безопасности вы можете заказывать смену PIN кода на 
+                                странице своего профайла.
+                          
+                                PIN-код вам необходим для вывода средств с вашего счета, как 
+                                крипты, так  и гривны.
+                             
+                                 Сохраните PIN-код в надежном месте, желательно запишите на бумажный носитель.
+                             
+                                <strong>Эта ссылка будет активна в течение 2 часов</strong>, после мы ее удалим.
+                             </p>                            
+                            
+</div>   
+
+   
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+{% include "scripts.html"%}
+   
+
+
+
+
+{%endblock%}
+
+

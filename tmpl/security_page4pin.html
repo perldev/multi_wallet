@@ -1,0 +1,70 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+  <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-9 main">
+                {% include "side_menu_finance.html" %}
+   
+        
+                <div class="col-md-9">
+                        <h1 class="page-header">Страница восстановления настроек безопасности </h1>
+                </div>
+                <div class="col-md-9 border_radius" id="transactions_block" >
+                                
+                                <table class="table table-hover" id='profile'>
+                                            <form action="{% url 'submit_security_page4pin' %}" method="POST">                           
+                                                <input value="{{key}}" type="hidden" name="key"  >
+
+                                                {% if error%}
+                                                <tr>
+                                                        <td colspan="2" ><div class="alert alert-warning"><strong>Увы! Вы ответили неправильно на один или несколько вопросов</strong></div></td>
+                                                </tr>
+                                                <tr>
+                                                        <td colspan="2" ><div class="alert alert-warning"><strong>Пожайлуста, проверьте ваши данные и попробуйте снова</strong></div></td>
+                                                </tr>
+                                                {% endif %}
+                                                <tr>
+                                                        <td>Пользователь:</td>
+                                                        <td>{{client.username}}</td>
+                                                </tr>
+                                                <tr>
+                                                        <td>Класс торговца:</td>
+                                                        <td>{{ class_value }}</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                        <td>Дата регистрации</td>
+                                                        <td>{{client.date_joined}}</td>
+                                                </tr>
+                                                <tr>
+                                                        <td colspan="2">Пожайлуста ответьте на следующие вопросы:</td>
+                                                </tr>
+                                                {% for item in questions %}
+                                                  <tr>
+                                                        <td colspan="2">Полный номер карты <strong>{{item.ask}}</strong>  на которую вы выводили <strong>{{item.tip}}</strong>:</td>
+                                                  </tr>
+                                                  <tr>
+                                                        <td colspan="2"><input placeholder="{{item.ask}}" type="text" name="{{item.uid}}" class="form-control" ></td>
+                                                  </tr>
+                                                {% endfor %}
+                                                  <tr>
+                                                        <td colspan="2"> <button type="submit" class="btn btn-enter">Проверить</button></td>
+                                                  </tr>
+                                                
+                                                
+
+                                            </form>                                                
+                        
+                                </table>
+                                
+                </div>          
+       </div>
+       {% include "scripts.html"%}
+
+
+    </div>
+  </div> 
+{%endblock%}

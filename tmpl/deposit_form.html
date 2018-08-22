@@ -1,0 +1,154 @@
+<!-- Modal -->
+<div class="modal fade" id="deposit_form" tabindex="-1" role="dialog" aria-labelledby="Deposit form" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Информация для пополнения: </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick='hide_modal("deposit_form")'>
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="col-md-12 cabinet-content-main-block modal-body" >     
+            <p class="help-block" id='help_finance_block_fiat'></p> 
+            <p class="help-block">Просим относиться с пониманием</p>
+            <div class="form-horizontal" role="form">
+                <div class="form-group">        
+                        <label class="col-sm-12 control-label" for="currency_depo">Валюта :</label>
+                        <div class="col-sm-12">
+                        <input type="text" disabled class="form-control" value=""
+                            id="currency_depo" >
+                        </div>       
+                </div>
+
+                <div class="form-group">        
+                        <div class="col-sm-12">
+                        <input type="text" class="form-control"
+                            id="amnt_depo" 
+                            placeholder="Сумма">
+                        </div>       
+                </div>
+          
+
+                <div class="form-group" id="label_phone_depo">        
+                        <div class="col-sm-12">
+                        <input type="phone" class="form-control"
+                            id="phone_depo" 
+                            placeholder="+380..">
+                        </div>       
+                </div>
+                <div class="form-group" id="provider_depo_form" >
+                    
+                        <div class="col-sm-12" id="depo">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-success" onclick="finance.change_depo('way4pay')"><font style="font-size:1.5rem;vertical-align: middle;font-weight: 600;">Оплатить картой 2.2%</font>
+                                    &nbsp;&nbsp;<img src="/static/cards.png" />
+                                    </button>
+                                    <button type="button" class="btn btn-light" onclick="finance.change_depo('p24_transfer')">
+                                    <font style="line-height: 3em;font-size:1.5rem; vertical-align: middle;;font-weight: 600;" >Оплатить 2.5%</font>&nbsp;&nbsp;<img src="/static/privat24.png" width="130px" />
+                                    </button>
+
+                            </div>
+                        </div>
+                </div>                                      
+            </div>
+      </div>     
+    </div>
+  </div>
+</div>
+
+<!--  Modal crypto  -->
+<div class="modal fade" id="deposit_form_crypto" tabindex="-1" role="dialog" aria-labelledby="Deposit form" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Информация для пополнения: </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick='hide_modal("deposit_form")'>
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="col-md-12 cabinet-content-main-block modal-body" >     
+            <p class="help-block" id='help_finance_block_crypto'></p> 
+            <p class="help-block">Просим относиться с пониманием</p>
+            <div class="form-horizontal" role="form">
+                <div class="form-group">        
+                        <label class="col-sm-12 control-label" for="currency_depo_crypto">Валюта :</label>
+                        <div class="col-sm-12">
+                        <input type="text" disabled class="form-control" value=""
+                            id="currency_depo_crypto" >
+                        </div>       
+                </div>
+                <div class="input-group">
+                            <label class="col-sm-12 control-label" for="crypto_account">Кошелек пополнения:</label>
+                            <div class="input-group-prepend">	
+					<button  type="button" class="btn btn-outline-secondary rounded-left" id="copy_adr" aria-label="Left Align">
+						<img src="/static/copy.png" alt="copy to clipboard"></img>
+					</button>
+                            </div>
+                            <input id="crypto_account" class="form-control" type="text" readonly value="" /></div>
+            
+                    
+                </div>
+                <div class="input-group" id="ext_info_show">
+                            <label class="col-sm-12 control-label" id="crypto_ext_info_label" for="crypto_ext_info"></label>
+                            <div class="input-group-prepend">	
+					<button  type="button" class="btn btn-outline-secondary rounded-right" id="copy_ext" aria-label="Left Align">
+						<img src="/static/copy.png" alt="copy to clipboard"></img>
+					</button>
+                            </div>
+                            <input id="crypto_ext_info" class="form-control" type="text" disabled value="" /></div>
+                </div>     
+                
+      </div>     
+    </div>
+  </div>
+</div>
+
+
+<!--  Modal crypto  -->
+<div class="modal fade" id="deposit_form_invoice" tabindex="-1" role="dialog" aria-labelledby="Deposit form" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    
+    
+      <div class="modal-header">
+        <h4>Информация для пополнения: </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick='hide_modal("deposit_form")'>
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="col-md-12 cabinet-content-main-block modal-body" >     
+            <p class="help-block" id='help_finance_block_invoice'></p> 
+            <div class="form-horizontal" role="form">
+                <div class="form-group">        
+                        <label class="col-sm-12 control-label" for="currency_depo_invoice">Валюта :</label>
+                        <div class="col-sm-12">
+                        <input type="text" disabled class="form-control" value=""
+                            id="currency_depo_invoice" >
+                        </div>       
+                </div>
+                <div class="form-group">
+                            <label class="col-sm-12 control-label" for="amnt_depo_invoice">Укажите сумму которую желаете перевести:</label>
+                            <input id="amnt_depo_invoice" class="form-control" type="text"  value="" />
+                </div>
+                <div class="form-group"  >
+                    
+                        <div class="col-sm-12" >
+                                 <div class="btn-group" role="group" aria-label="Basic example">
+
+                                    <button type="button" class="btn btn-enter" 
+                                            id='btc_trade_checkout' 
+                                            onclick='finance.checkout_start()'
+                                    ><font style="font-size: 1.7rem;    vertical-align: middle;    line-height: 3em;    padding-left: 1em;    padding-right: 1em;">Оплатить</font>
+                                    &nbsp;&nbsp;
+                                    </button>
+                                </div>
+                        </div>
+                </div>  
+           </div>     
+                
+      </div>
+      
+      
+    </div>
+  </div>
+</div>

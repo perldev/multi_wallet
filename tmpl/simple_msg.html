@@ -1,0 +1,28 @@
+{% extends "base_main_cabinet.html" %}
+
+{% load my_formats %}
+
+
+{% block cabinet_title %}{{title}}{% endblock %}
+{% block cabinet_content %}
+
+<div class="col-sm-10  form-page-col">
+                <p class="help-block">
+                    {% autoescape off %} 
+                                    {{simple_msg}}
+                    {% endautoescape %}                
+                </p>
+                            
+</div>   
+
+   
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% include "scripts.html"%}
+   
+
+
+
+
+{%endblock%}

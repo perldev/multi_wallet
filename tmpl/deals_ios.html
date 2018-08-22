@@ -1,0 +1,42 @@
+    <div class="col-md-12  border_radius" >
+               <h5 class="sub-header text-info">История сделок</h5>
+               <h6 class="sub-header text-info" id="date_deals_comp" >За дату:
+                  <input type="text" id="date_deals" value="{% if date1 %}{{date1}} {%else%}Сегодня{% endif %}">&nbsp;
+                  <input type="text" id="date_deals1" value="{% if date2 %}{{date2}} {%else%}Завтра{% endif %}">&nbsp;
+                   &nbsp;&nbsp;<label class="radio-inline"><input   type="radio" checked name="type" value="ios">Apple</label>
+                   &nbsp;&nbsp;<button onclick="search()" class="btn btn-enter">Искать</button>
+                  </h6>
+
+               <div class="table-responsive">
+                        <table class="table table-striped">
+                        <thead>
+                                <tr>
+                                <th>Дата</th>
+                                <th>Пользователь</th>
+                                <th>Тип</th>
+                                <th>Цена</th>
+                                <th>{{Currency1}}</th>
+                                <th>{{Currency}}</th>
+                                <th>%</th>
+                                <th>выплачено</th>
+
+                                </tr>
+                        </thead>
+                        <tbody >
+                                {% for item in deals %}
+                                    <tr>
+                                        <td>{{item.pub_date}}</td>
+                                        <td>{{item.user}}</td>
+                                        <td>{{item.type}}</td>
+                                        <td>{{item.price}} {{Currency1}}</td>
+                                        <td>{{item.amnt_base}}</td>
+                                        <td>{{item.amnt_trade}}</td>
+                                        <td>{{item.percent}}</td>
+                                        <td>{{item.comission}}</td>
+                                    </tr>
+                                {% endfor %}
+                        </tbody>
+                        </table>
+                </div>
+    </div>
+                            

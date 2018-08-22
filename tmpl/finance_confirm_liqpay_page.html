@@ -1,0 +1,27 @@
+{% extends "simple_form_main.html" %}
+
+{% load my_formats %}
+
+
+{% block form %}
+
+
+<div class="col-sm-10  form-title">
+    <h1 class="page-header" style="text-align:center">Финансы, страница подтверждения  пополнение счета</h1>
+</div>
+<div class="col-sm-10  form-page-col centering">
+                <p class="help-block" " id="work_msg">
+                               Ожидаем подтверждения оплаты
+                </p>
+                            
+</div>                                 
+{% include "scripts.html" %}
+{%endblock%}
+
+{% block scripts%}
+                <script>
+                        finance.order_id = {{order}};
+                        finance.timer =  setTimeout(finance.ui_check_status,2000);
+                </script>
+ 
+{% endblock %}

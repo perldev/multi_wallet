@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="{{STATIC_SERVER}}favicon.ico" type="image/x-icon">
+    <meta name="mailru-verification" content="770e0d9e4f5ff207" />
+<meta name="interkassa-verification" content="f278cc260d7f4d625288745fddc6b847" />
+    <meta name="viewport" content="width=990, initial-scale=0.3">
+    <meta name="keywords" content="bitcoin, купить bitcoin, покупка bitcoin, продажа bitcoin, купить btc-e код, продать btc-e код, продать Bitcoin, обменять bitcoin, обменник bitcoin, купить биткоин, продать биткоин, обменник биткоин, курс биткоина, bitcoin кошелек, {{keywords}}" />
+    <meta name="description" content="bitcoin, купить bitcoin, покупка bitcoin, продажа bitcoin, купить btc-e код, продать btc-e код, продать Bitcoin, обменять bitcoin, обменник bitcoin, купить биткоин, продать биткоин, обменник биткоин, курс биткоина, bitcoin кошелек, {{description}}" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>{{pagetitle}} - {{title}}</title>
+    <!-- Bootstrap core CSS -->
+
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" href="{{STATIC_SERVER}}favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="{{STATIC_SERVER}}css/home.css"> <!-- Resource style -->
+    <link href="{{STATIC_SERVER}}css/topnav-home.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{STATIC_SERVER}}/css/green.css">
+
+    <link href="{{STATIC_SERVER}}css/flaticon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{STATIC_SERVER}}css/bootstrap.css"> <!-- CSS reset -->
+
+
+    <link href="{{STATIC_SERVER}}css/jquery.dialog2.css" rel="stylesheet">
+    <link href="{{STATIC_SERVER}}css/bootstrap-datepicker3.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+  {%include "header_home.html"%}
+
+  <div class="static-page-wrapper"> 
+
+  <main class="cd-main-content">
+
+    <nav class="cd-side-nav">
+    </nav>
+
+    <div class="home-welcome-block">
+      <div class="container home-intro-container">
+        <div class="row">
+          <div class="col-lg-12 home-intro">
+            <h1>Украинская биржа криптовалют</h1>
+            <span>
+              Широкий выбор валютных пар. Низкая комиссия. Безопасность операций.
+            </span>
+          </div>
+          <div class="col-lg-12">
+            <div class="row justify-content-center">
+              <div class="home-intro-btns-box">
+                {% if  not is_user %}
+                <button type="button" class="btn home-registr-btn" onclick="window.location.href='/registration'">Регистрация</button>
+                <button type="button" onclick="window.location.href='/login_page'" class="btn home-enter-btn">Войти</button>
+                {% else %}
+                <a href="/stock" class="btn home-registr-btn">Перейти к торгам</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>  
+          <div class="col-lg-12 home-intro-pricies">
+            <div class="row">
+              <div class="col-lg-2 col-md-2 col-sm-2 ml-auto text-center">
+                <span class="home-currency-title">Bitcoin</span>
+                <span class="home-currency-price" id="btc_uah_top_price">150 000</span>
+                <span class="home-currency">UAH</span>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-2 ml-auto text-center">
+                <span class="home-currency-title">Litecoin</span>
+                <span class="home-currency-price"  id="ltc_uah_top_price">5 000</span>
+                <span class="home-currency">UAH</span>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-2 ml-auto text-center">
+                <span class="home-currency-title">Ethereum</span>
+                <span class="home-currency-price"  id="eth_uah_top_price">32 000</span>
+                <span class="home-currency">UAH</span>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-3 ml-auto text-center">
+                <span class="home-currency-title">Karbowanec</span>
+                <span class="home-currency-price" id="krb_uah_top_price">55.43 </span>
+                <span class="home-currency">UAH</span>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-3 ml-auto text-center">
+                <span class="home-currency-title">ZCash</span>
+                <span class="home-currency-price" id="zec_uah_top_price">8 431</span>
+                <span class="home-currency">UAH</span>
+              </div>                                                        
+            </div>
+          </div>        
+        </div>
+      </div>
+    </div>
+
+    <div class="container home-common-container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 main-clause-col">
+          <img src="{{STATIC_SERVER}}img2018/ic1.png" class="img-fluid">
+          <span class="main-clause">Быстрая регистрация</span>
+          <span class="main-clause-descript">Простая регистрация в системе не займет больше 5 минут вашего времени.</span>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 main-clause-col">
+          <img src="{{STATIC_SERVER}}img2018/ic2.png" class="img-fluid">
+          <span class="main-clause">Пополнение баланса с карты</span>
+          <span class="main-clause-descript">Быстрое пополнение баланса с помощью карты любого украинского банка</span>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 main-clause-col">
+          <img src="{{STATIC_SERVER}}img2018/ic3.png" class="img-fluid">
+          <span class="main-clause">Обмен без посредников</span>
+          <span class="main-clause-descript">Покупка криптовалюты напрямую у участников биржи без посредников</span>
+        </div>        
+      </div>
+    </div>  
+
+    <div class="container-grey-wrapper">
+      <div class="container home-common-container">
+        <div class="row align-items-center">
+          <div class="col-md-6 offset-md-3 home-section-col">
+            <h3 class="home-section-title">Платформа BTC TRADE UA</h3>
+            <span class="home-section-intro">Обеспечиваем быстрый и безопасный обмен криптовалюты между реальными пользователями</span>
+          </div>  
+          <div class="col-lg-5 col-md-5 col-sm-12 home-about-col">
+            <div class="home-sentence-div">
+              <span class="home-first-sentence">Большой выбор валютных пар.</span><span>У нас можно обменять большинство популярных криптовалют.</span>
+            </div>
+            <div class="home-sentence-div">
+              <span class="home-first-sentence">Оперативная техподдержка.</span><span>Помогаем пользователям с решением возникших вопросов в режиме 24/7.</span>
+            </div>
+            <div class="home-sentence-div">
+              <span class="home-first-sentence">Беопасность операций.</span><span>Обеспечиваем безопасное проведение торговых операций.</span>
+            </div>                    
+          </div>  
+          <div class="col-lg-7 col-md-7 col-sm-12 home-sentence-img">
+            <img src="{{STATIC_SERVER}}img2018/note.jpg" class="img-fluid">
+          </div>  
+        </div>
+      </div>  
+    </div>
+
+    <div class="container-darkgrey-wrapper">
+      <div class="container home-common-container">
+        <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-6 feature-col">
+            <span class="feature">23 валютные пары</span>
+            <span class="feature-descript">доступны для торговых операций</span>  
+          </div>  
+          <div class="col-lg-3 col-md-3 col-sm-6 feature-col">
+            <span class="feature">60К+ пользователей</span>
+            <span class="feature-descript">работают на платформе btc trade ua</span> 
+          </div>  
+          <div class="col-lg-3 col-md-3 col-sm-6 feature-col">
+            <span class="feature">24/7 техподдержка</span>
+            <span class="feature-descript">пользователей платформы btc trade ua</span> 
+          </div>  
+          <div class="col-lg-3 col-md-3 col-sm-6 feature-col">
+            <span class="feature">1,5К+ сделок</span>
+            <span class="feature-descript">закрываемых на платформе ежедневно</span>  
+          </div>                                
+        </div>
+      </div>  
+    </div>    
+
+
+    <div class="container home-common-container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 smart-col-img">
+          <img src="{{STATIC_SERVER}}img2018/smart.jpg" class="img-fluid">
+        </div>  
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 smart-col">
+          <h3>Мобильное приложение <span class="mobile-span">BTC TRADE UA</span></h3>
+          <div class="mobile-btns">
+            <a href="https://itunes.apple.com/ua/app/btc-trade-ukraine/id1359815912?l=ru&amp;mt=8"><img src="{{STATIC_SERVER}}img2018/str1.jpg" class="img-fluid"></a>
+            <a href="https://play.google.com/store/apps/details?id=multico.in.btctrade"><img src="{{STATIC_SERVER}}img2018/str2.jpg" class="img-fluid"></a>
+          </div>
+        </div>                                    
+      </div>
+    </div>  
+
+    <div class="container-darkgrey-wrapper container-slide">
+    <div class="container home-common-container">
+      <div class="row">
+        <div class="col slider-col">
+
+          <h3 class="home-section-title">Криптовалюта - это удобно</h3>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Международные платежи</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Безопасная сеть</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Отсутствие посредников</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-10 offset-md-1">
+                    <div class="row align-items-center">
+                      <div class="col-lg-5 tab-text text-right">
+                        Для криптовалюты не существует государственных барьеров и границ
+                      </div>
+                      <div class="col-lg-7">
+                        <img src="{{STATIC_SERVER}}img2018/sl1.png" class="img-fluid">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-10 offset-md-1">
+                    <div class="row align-items-center">
+                      <div class="col-lg-5 tab-text text-right">
+                        Процессинг ваших платежей осуществляет cеть из  тысяч компьютеров
+                        по всему миру
+                      </div>
+                      <div class="col-lg-7">
+                        <img src="{{STATIC_SERVER}}img2018/sl2.png" class="img-fluid">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>      
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-10 offset-md-1">
+                    <div class="row align-items-center">
+                      <div class="col-lg-5 tab-text text-right">
+                        Криптовалюту нельзя заблокировать по решению суда или лопнуть, когда банк ушел в небытье
+                      </div>
+                      <div class="col-lg-7">
+                        <img src="{{STATIC_SERVER}}img2018/sl3.png" class="img-fluid">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>      
+            </div>
+          </div>
+
+        </div>                                
+      </div>
+    </div>
+    </div>      
+
+    <div class="container home-common-container home-history">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <h3>История торгов</h3>
+        {% include "deals_for_home.html"%}      
+        </div>
+      </div>
+    </div>    
+
+      
+
+  </main> <!-- .cd-main-content -->
+
+  </div><!--END of MAIN WRAPPER-->  
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-8 pull-left">
+          <p>
+            Copyright © BTC TRADE UA 2014-2018 | All Rights Reserved
+            <br>
+            По всем вопросам обращайтесь в email: support@btc-trade.com.ua 
+          </p>
+        </div>
+         <div class="pull-right col-md-3 text-right">
+                        <a target="blank" href="https://itunes.apple.com/ua/app/btc-trade-ukraine/id1359815912?l=ru&amp;mt=8">
+                            <img  class="img-responsive" src="/static/img2018/str11.jpg" /></a>
+                </div>
+         <div class="pull-right col-md-1 text-right">
+                        <a target="blank" href="https://play.google.com/store/apps/details?id=multico.in.btctrade">
+                            <img  class="img-responsive" src="/static/img2018/str22.jpg" /></a>
+         </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+
+
+
+
+</body>
+
+
+{% include "scripts.html"%}
+
+  
+
+
+{%  include "external_script.html" %}
+
+    <script type="text/javascript">
+            $(function() {
+                Main.trade_pair = "btc_uah";
+
+                Main.currency_base = "UAH";
+
+                Main.currency_on = "BTC";
+
+                Main.deals_list();
+
+                Main.start_market_prices();
+            });
+        </script>
+
+  </body>
+
+
+</html>

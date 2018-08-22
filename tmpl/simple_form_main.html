@@ -1,0 +1,47 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+<div class="static-page-wrapper">
+
+  <main class="cd-main-content">
+    <nav class="cd-side-nav">
+    </nav>
+
+
+    <div class="container cabinet-main-container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+
+          <div class="common-block cabinet-content-main-block">
+            <div class="row">
+
+
+            {% block form %} {% endblock %}
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main> <!-- .cd-main-content -->
+
+  </div><!--END of MAIN WRAPPER -->
+  
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% include "scripts.html"%}
+
+
+</div>
+
+
+
+{%endblock%}
+

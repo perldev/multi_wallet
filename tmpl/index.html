@@ -1,0 +1,191 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+
+  <div class="stock-wrapper">
+
+  <main class="cd-main-content">
+    <nav class="cd-side-nav">
+      <ul>
+        <li class="cd-label">Валютные пары</li>
+
+          {% for Currency in CurrencyTrade %}
+                  {% if Currency.url_title == current_stock %}
+                  <li class="overview active">
+                    <a href="#">{{Currency.title}}
+                      <span class="currency-curs" id="{{Currency.url_title}}_top_price">{{Currency.top_price}}</span>
+                    </a>
+                  </li>
+                  {% else %}
+                        {% if Currency.is_title %}
+                        <h5 style="line-height:2em" class="sub-header text-info" >Рынок:&nbsp;<strong>{{Currency.title}}</strong></h5>
+
+                        {% else %}
+                        <li class="overview">
+                          <a href="/stock/{{Currency.url_title}}">{{Currency.title}}
+                            <span class="currency-curs" id="{{Currency.url_title}}_top_price">{{Currency.top_price}}</span>
+                          </a>
+                        </li>
+
+                        {% endif %}
+                  {% endif %}
+          {% endfor %}
+
+        {% if is_user %}
+        <a href="/logout" class="btn btn-menu-enter">Выйти</a>
+        {% else %}
+        <a href="/login_page" class="btn btn-menu-enter">Регистрация / Войти</a>
+        {% endif %}
+      </ul>
+
+    </nav>
+
+
+    <div class="content-wrapper">
+
+      <div class="container-fluid main-stock-container">
+        <div class="row">
+          <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12">
+            <div class="row">
+
+              {% if is_user %}
+
+              <div class="col-12">
+                <div id="user_panel" class="stock-profile-bar">
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="stock-profile-menu">
+                        <ul>
+                          <li><a href="/profile/{{username}}">Профиль</a></li>
+                          <li><a href="/finance">Финансы</a></li>
+                          <li><a id="menu_notification" href="/notification">Уведомления<strong id="notify_count">({{new_notfication_count}})</strong></a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="stock-balance">
+                        <ul class="nav justify-content-sm-start justify-content-md-end">
+                          <li class="nav-item">Баланс:</li>
+                          <li class="nav-item"><span id="balance_{{Currency1}}">0.00</span>{{Currency1}}</li>
+                          <li class="nav-item"><span id="balance_{{Currency}}">0.00</span>{{Currency}}</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+              {% else %}
+
+              <div class="col-12">
+                <div id="user_panel" class="stock-profile-bar">
+                    <div class="form-row align-items-center">
+                      <div class="col-md-3 col-sm-4 my-1">
+                        <input type="email" class="form-control" id="login_username" placeholder="Email">
+                      </div>
+                      <div class="col-md-3 col-sm-4 my-1">
+                         <input type="password" class="form-control" onkeyup="Login.keyup(event)" id="login_password" placeholder="Пароль">
+                      </div>
+                      <div class="col-auto my-1">
+                        <button type="submit" class="btn btn-light" onclick="javascript:Login.try_login()">Войти</button>
+                      </div>
+                      <a href="/forgot" class="forgot-link">Забыли пароль?</a>
+                    </div>
+
+                  <div id="captcha_slider_down"  style="display:none;">
+                    <p class="required">
+                        <label for="id_captcha">Я не робот:</label>
+                    <p>
+                    <div id="id_captcha"  class="g-recaptcha" data-sitekey="{{RECAPTCHA_PUBLIC_KEY2}}"></div>
+                  </div>
+
+                </div>
+              </div>
+
+              {% endif %}
+
+
+              {% include "index_notice.html"%}
+
+
+              <div class="col-12">
+                <div class="common-block stock-chart">
+                  <ul class="nav justify-content-start">
+                    <li class="nav-item">Курс UAH/USD:<span>{{usd_uah_rate}}</span></li>
+                    <li class="nav-item">Объем:<span id="volume_base"></span>{{ Currency1 }}/<span id="volume_trade"></span>{{Currency}}</li>
+                    <li class="nav-item">Online:<span id="online_users"></span></li>
+                    <li class="nav-item">Комиссия:<span id="client_comis"></span>%</li>
+                  </ul>
+
+                 <div  id="chart_trade" >
+                    <img src="{{STATIC_SERVER}}processing.gif"/>
+                 </div>
+                 <div  id="chart_btce" style="display:none"></div>
+
+                </div>
+              </div>
+
+              <!-- Place orders -->
+              <div class="col-12">
+                <div class="row">
+
+                {% include "buy_form.html" %}
+
+                {% include "sell_form.html" %}
+
+                </div>
+              </div>
+
+            {% include "my_open_orders.html"%}
+
+            {% include "orders.html"%}
+
+            {% include "deals.html"%}
+
+
+            </div>
+          </div>
+
+
+            {% include "index_chat.html" %}
+
+
+        </div>
+      </div>
+
+
+    </div> <!-- .content-wrapper -->
+  </main> <!-- .cd-main-content -->
+
+  </div><!--END of stock-wrapper-->
+
+
+{% include "g2a_modal_dlg.html"%}
+
+{%endblock%}
+
+{% block scripts %}
+
+     <script type="text/javascript">
+
+        Main.trade_pair = "{{trade_pair}}";
+        Main.min_deal = {{min_deal}};
+        Main.currency_base = "{{Currency1}}";
+        Main.currency_on = "{{Currency}}";
+        Main.usd_uah_rate = "{{usd_uah_rate}}";
+        Main.rand_key = "{{rand_key}}"
+      $(function() {
+        Main.start_stock();
+//         Chat.username = "bogdan2";
+         Chat.attach2chat("chat_msg");
+
+
+      });
+
+    </script>
+
+{%endblock %}

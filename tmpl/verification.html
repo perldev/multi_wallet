@@ -1,0 +1,358 @@
+{% extends "base_main.html" %}
+{% load my_formats %}
+{% block content %}
+
+<div class="container-fluid">
+<!--         <div class="row"> -->
+
+      <div class="row justify-content-sm-center">
+        <div class="col-md-9 main">
+               {% include "side_menu_finance.html" %}
+
+                <div class="col-md-9">
+                        <h1 class="page-header">Идентификация {{PROJECT_NAME}}</h1>
+                </div>
+                <div class="col-md-9 border_radius" id="transactions_block" >
+                                
+
+
+                    <div class="auth_form">
+            <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/profile/verification_submit" role="form" >                   
+                                  
+           
+        
+                        <div class="form-group row">
+                            <label for="id_first_name" class="col-sm-12 col-form-label">Имя Фамилия (Отчество):</label>
+                        
+                        </div>
+                        
+                        
+                            <div class="form-group row">
+                            {% if form.first_name.errors %}
+                        
+                                                {% for error in form.first_name.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                        {% endif %}     
+                        <div class="col-sm-12">
+                                <input class="form-control" id="id_first_name" value="{% if form.first_name.value %} {{ form.first_name.value}} {% endif %}" maxlength="255" name="first_name" placeholder="Имя" type="text">
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="form-group row">
+                            {% if form.last_name.errors %}
+                        
+                                                {% for error in form.last_name.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                            {% endif %}     
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_last_name" maxlength="255" value="{% if form.last_name.value %}  {{ form.last_name.value }}  {% endif %}" name="last_name" placeholder="Фамилия" type="text">
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group row">
+                            {% if form.middle_name.errors %}
+                        
+                                                {% for error in form.middle_name.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                            {% endif %}     
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_middle_name" maxlength="255" value="{% if form.middle_name.value %} {{ form.middle_name.value}}{% endif %}"  name="middle_name" placeholder="Отчество" type="text">
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group row">
+                        
+                            <label for="id_birthdate" class="col-sm-12 col-form-label">Дата рождения:</label>
+                                        {% if form.birthdate.errors %}
+                        
+                                                {% for error in form.birthdate.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_birthdate"  value="{% if form.birthdate.value %}{{ form.birthdate.value }}{% endif %}" name="birthdate" placeholder="Дата рождения" type="text">
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="form-group row">
+                            <label  class="col-sm-12 col-form-label">Данные  гражданства:</label>
+
+                        </div>
+                        
+                        <div class="form-group row">
+                            {% if form.citizenship.errors %}
+                        
+                                                {% for error in form.citizenship.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_citizenship" maxlength="255" value="{% if form.citizenship.value %}{{ form.citizenship.value }} {% endif %}" name="citizenship" placeholder="Гражданство" type="text">
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group row">
+                            {% if form.country.errors %}
+                        
+                                                {% for error in form.country.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                        
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_country" maxlength="255" value="{% if form.country.value %}{{ form.country.value}} {% endif %}" name="country" placeholder="Страна проживания" type="text">
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group row">
+                            {% if form.town.errors %}
+                        
+                                                {% for error in form.town.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_town" maxlength="255" value="{% if form.town.value %}{{ form.town.value}} {% endif %}" name="town" placeholder="Город проживания" type="text">
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group row">
+                                {% if form.address.errors %}
+                        
+                                                {% for error in form.address.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_address" maxlength="255"  value="{% if form.address.value %}{{ form.address.value}} {% endif %}" name="address" placeholder="Адрес" type="text">
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="form-group row">
+                            <label  class="col-sm-12 col-form-label">Документы идентификации личности:</label>
+                        </div>
+                        
+                        <div class="form-group row">
+                            {% if form.id_number.errors %}
+                        
+                                                {% for error in form.id_number.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_id_number" value="{% if form.id_number.value %} {{ form.id_number.value}} {% endif %}" maxlength="255" name="id_number" placeholder="Id" type="text">
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group row">
+                            {% if form.id_issued.errors %}
+                        
+                                                {% for error in form.id_issued.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_id_issued" value="{% if form.id_issued.value %} {{ form.id_issued.value}} {% endif %}" name="id_issued" placeholder="Дата выдачи" type="text">
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group row">
+                            {% if form.id_expired.errors %}
+                        
+                                                {% for error in form.id_expired.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_id_expired" value="{% if form.id_expired.value %} {{ form.id_expired.value}} {% endif %}" name="id_expired" placeholder="Дата expired" type="text">
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                            <label  class="col-sm-12 col-form-label">Копии документов:</label>
+                        </div>
+                        
+                        
+                        <div class="form-group row">
+                            {% if form.id_f1.errors %}
+                        
+                                                {% for error in form.id_f1.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_id_f1" name="id_f1" placeholder="Identity verification(front):" type="file">
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group row">
+                            {% if form.id_b1.errors %}
+                        
+                                                {% for error in form.id_b1.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_id_b1" name="id_b1" placeholder="Identity verification(back):	" type="file">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label  class="col-sm-12 col-form-label">Копии документов доказательства проживания:</label>
+                        </div>
+                        
+                        
+                        <div class="form-group row">
+                            {% if form.residence.errors %}
+                        
+                                                {% for error in form.residence.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_residence" name="residence" placeholder="Proof of residence" type="file">
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="form-group row">
+                            {% if form.residence1.errors %}
+                        
+                                                {% for error in form.residence1.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_residence1" name="residence1" placeholder="Proof of residence1" type="file">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label  class="col-sm-12 col-form-label">Selfi:</label>
+                        </div>
+                        
+                        
+                        <div class="form-group row">
+                                    {% if form.selfie.errors %}
+                        
+                                                {% for error in form.selfie.errors  %}
+                                                    <span class="help-block alert alert-danger">{{ error }}</span>
+                                                {% endfor %}
+                                    {% endif %}    
+                    
+                            <div class="col-sm-12">
+                                <input class="form-control" id="id_selfie" name="selfie" placeholder="Selfie with document" type="file">
+                            </div>
+                        </div>
+                        
+                        
+                        
+                            <div class="col-sm-12 text-center">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox"> Я согласен на обработку персональных данных
+                                </label>
+                            </div>
+                        
+                        
+                        
+                    
+
+                                                            
+                                                            <div class="form-group row justify-content-sm-center">
+                                                                <div class="col-sm-12">
+                                                                <button type="submit" class="btn trade_action_btn">Отправить</button>
+                                                                </div>
+                                                            </div>
+                                                        
+                                </div>
+                                
+            </form>       
+            </div>      
+          
+
+                </div>
+        
+      </div>
+    </div>
+
+   {% include "scripts.html"%}
+   
+</div> 
+
+
+
+{%endblock%}
+
+    
+    
+
+
+
+
+{% block scripts%}
+    <script type="text/javascript">
+     
+     (function(){
+
+            $("#id_id_issued").datepicker({
+                format: "dd-mm-yyyy"
+            }).on("changeDate", function(e) {
+                $("#id_id_issued").datepicker("hide");
+            });
+            
+            console.log("load date picker");
+            $("#id_id_expired").datepicker({
+                format: "dd-mm-yyyy"
+            }).on("changeDate", function(e) {
+                $("#id_id_expired").datepicker("hide");
+            });
+              $("#id_birthdate").datepicker({
+                format: "dd-mm-yyyy"
+            }).on("changeDate", function(e) {
+                $("#id_birthdate").datepicker("hide");
+            });
+            
+            $("#id_birthdate").datepicker("hide");
+            $("#id_id_expired").datepicker("hide");
+            $("#id_id_issued").datepicker("hide");
+    
+        })();
+     
+     
+    </script>
+{% endblock %}
+

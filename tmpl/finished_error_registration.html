@@ -1,0 +1,20 @@
+{% extends "simple_form_main.html" %}
+
+{% load my_formats %}
+
+
+{% block form %}
+
+
+<div class="col-sm-10  form-title">
+    <h1 class="page-header" style="text-align:center">Активация профиля пользователя </h1>
+</div>
+<div class="col-sm-10  form-page-col">
+                        <div class="col-md-6 errorlist centering" >
+                             <h5>Увы! Похоже вы уже переходили по этой ссылке</h5>
+                        </div>  
+                          
+</div>         
+{% include "scripts.html"%}   
+
+{% endblock %}

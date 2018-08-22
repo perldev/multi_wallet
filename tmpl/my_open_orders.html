@@ -1,0 +1,36 @@
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="common-block table-list-block">
+                      <h4>Ваши заявки на куплю/продажу</h4>
+                      <!--
+                      <div class="no-orders">
+                        <h3>У вас нет ни одной заявки</h3>
+                      </div>
+                      -->
+                      <div class="">
+                        <table class="table table-striped table-responsive-lg my-orders-table">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col text-center">Дата</th>
+                              <th scope="col">Тип</th>   
+                              <th scope="col">Цена</th>
+                              <th scope="col text-center">{{Currency1}}</th>
+                              <th scope="col">{{Currency}}</th>   
+                              <th scope="col">Действия</th>                
+                            </tr>
+                          </thead>
+                          <tbody id="your_open_orders">
+                              <tr>
+                                <td colspan="7" align="center">
+                                  <img src="{{STATIC_SERVER}}processing.gif"/>
+                                </td>
+                              </tr>
+                          </tbody>
+                        </table>
+                      </div>                      
+                    </div>
+                  </div>
+                </div>
+              </div>  

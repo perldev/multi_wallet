@@ -1,0 +1,75 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+
+
+<div class="static-page-wrapper">
+
+  <main class="cd-main-content">
+    <nav class="cd-side-nav">
+    </nav>
+
+
+    <div class="container cabinet-main-container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+
+          <div class="common-block cabinet-content-main-block">
+            <div class="row">
+
+
+  
+      
+                        <div class="col-sm-10  form-title">
+                            <h1 class="page-header" style="text-align:center">Регистрация на BTC TRADE UA </h1>
+                        </div>
+            
+                        <div class="col-sm-10  form-page-col">
+                                        {% if captcha_error %}
+                                        <div class="help-block alert alert-danger" role="alert">
+                                            Captcha говорит что вы робот
+                                        </div>  
+                                        
+                                        {% endif %}
+                                        <form class="form-horizontal" action="/try_regis" role="form" method="POST" >
+                                                {% csrf_token %}
+                                                {% include 'bs_form4.html' with form=regis_form %}
+
+                                                
+                                                <p class="required"><label for="id_captcha">Я не робот:</label>
+                                                    <p><div id="id_captcha"  class="g-recaptcha" data-sitekey="{{RECAPTCHA_PUBLIC_KEY2}}"></div>
+                                                <p>
+
+                                                <div class="registr-btn-wrapper">
+                                                        <button type="submit" class="btn btn-enter">Зарегистрироваться</button>
+                                                </div>
+                                        </form>
+
+                        </div>
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main> <!-- .cd-main-content -->
+
+  </div><!--END of MAIN WRAPPER -->
+  
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% include "scripts.html"%}
+
+
+</div>
+
+
+
+{%endblock%}

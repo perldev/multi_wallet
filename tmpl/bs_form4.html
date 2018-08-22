@@ -1,0 +1,37 @@
+    {% load widget_tweaks %}
+    {% load my_formats %}
+    
+    {% for hidden in form.hidden_fields %}
+      {{ hidden }}
+    {% endfor %}
+    
+    {% for error in form.errors %}
+      {% if error == '__all__' %}
+            <div class="form-group" >
+                <div class="help-block alert alert-danger">{{ form.non_field_errors }}</div>
+            </div>
+      {% endif %}
+    {% endfor %}
+    {% for field in form.visible_fields %}
+      {% if field|is_checkbox %}
+        <div class="form-group">
+            {% for error in field.errors %}
+            <div class="help-block alert alert-danger">{{ error }}</div>
+            {% endfor %}
+            <div class="form-check col-sm-12">
+                <label class="form-check-label">
+                <input class="form-check-input" name="{{field.name}}" type="checkbox"> {{field.label}}
+                </label>
+            </div>
+        </div>
+      {% else %}
+      
+       <div class="form-group" >
+         {% for error in field.errors %}
+           <div class="help-block alert alert-danger">{{ error }}</div>
+         {% endfor %}         
+         {% render_field field class="form-control" placeholder=field.label %}
+       </div>
+       {% endif %}
+    {% endfor %}
+  

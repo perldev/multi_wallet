@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>{{title}}</title>
+</head>
+<body>
+	<div class="container-fluid bg-light sticky-top">
+		<nav class="navbar justify-content-between">
+			<div class="col-2">
+				<div id="logo_btc">
+					<img src="{% if logo_url %}{{logo_url}}{% else %}https://btc-trade.com.ua/static/home/img/logo.png{% endif %}" alt="" height="50">
+				</div>
+			</div>
+			<div class="col-8">
+				<p id="sum_title" class="text-center mb-0 mt-1" style="color: green" lang="EN">Общая сумма:<br></p>
+                                <p id="price" class="text-center mb-0" style="color: green; font-size: xx-large;">{{amnt_src}} {{currency_src}}</p>
+			</div>
+			<div class="col-2">
+				<select id="lang" class="form-control">
+<!--					<option selected>EN</option>-->
+					<option selected>RU</option>
+<!-- 					<option>UA</option> -->
+				</select>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container-fluid bg-white">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 mt-3">
+				<table class="table " data-toggle="collapse" data-target="#invoices" aria-expanded="false" aria-controls="invoices">
+					<caption>Транзакции которые относятся к этому инвойсу</caption>
+					<thead>
+						<tr id="transactions_list">
+							<th id="amnt" scope="col">Сумма</th>
+							<th id="confirms" scope="col">Подтверждения</th>
+							<th id="crypto_txid" scope="col">Хеш транзакции</th>
+						</tr>
+					</thead>
+					<tbody class="collapse" id="invoices">
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6 offset-md-3 mt-3">
+				<div class="card">
+					<div class="card-header" id="description">
+						<h5 class="mb-0">
+							<button class="btn btn-link" data-toggle="collapse" data-target="#description_details"
+                                                                aria-expanded="false"
+                                                                aria-controls="description_details"
+                                                                style="white-space: normal;">{{title}}
+							</button>
+						</h5>
+					</div>
+					<div id="description_details" class="collapse" aria-labelledby="headingOne">
+						<div class="card-body">
+							{{description}}
+                                                    </div>
+				    </div>
+				</div>
+			</div>
+			<a id="tip" class="offset-md-3 col-md-6 text-center text-muted mt-3" lang="EN">
+                            Для оплаты используйте следующие данные
+			</a>
+			<div class="input-group mt-3 col-md-6 offset-md-3 rounded">
+                                <div class="input-group-prepend">
+					<button id="copy_adr" type="button" class="btn btn-outline-secondary rounded-left" aria-label="Left Align">
+						<img src="/static/copy.png" alt="copy to clipboard"></img>
+					</button>
+				</div>
+				<input id="crypto_adress" type="text" value="{{address}}" class="form-control" readonly="readonly" style="background-color: #f7f7f7"/>
+				 <div class="input-group-append">
+					<span id="crp_val_title" class="input-group-text" style="color: green" lang="EN">USDT</span>
+				</div>
+
+
+			</div>
+			<div class="input-group mt-3 col-md-6 offset-md-3 rounded">
+				<div class="input-group-prepend">
+                                        <button id="copy_val" type="button" class="btn btn-outline-secondary" aria-label="Left Align">
+						<img src="/static/copy.png" alt="copy to clipboard"></img>
+					</button>
+				</div>
+				<input id="crypto_value" value="{{amnt}}" type="text" class="form-control" readonly="readonly" style="background-color: #f7f7f7"/>
+
+			</div>
+			<div class="offset-md-3 col-md-6 d-flex justify-content-between mt-3">
+				<button onclick="window.location.href='{{url_return}}'" id="back_to_site" type="button" class="btn btn-secondary col-4 border rounded" lang="RU">
+					Вернуться на сайт
+				</button>
+				<button id="pay_due_to" type="button" class="btn btn-success col-4 border rounded" lang="EN">
+					Pay
+				</button>
+			</div>
+			<a class="offset-md-3 col-md-6 text-center text-muted mt-2" id="help_text" href="#help">Вам необходимо перевести указанную сумму, на адрес кошелька.
+			Данные для платежа актуальны ограниченное время.
+			</a>
+		</div>
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		//test crypto data
+
+
+		{% autoescape off %}
+
+		var start_time = {{pub_date}};
+		var expire_time = {{expire_date}};
+		var status = "{{order_status}}";
+
+		{% endautoescape %}
+		var countDownDate = expire_time*1000;
+
+                if(status == "processing"){
+                        // Update the count down every 1 second
+                        var x = setInterval(function() {
+
+                        // Get todays date and time
+                        var now = new Date().getTime();
+
+                        // Find the distance between now an the count down date
+                        var distance = countDownDate - now;
+
+                        // Time calculations for days, hours, minutes and seconds
+                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                        // Display the result in the element with id="demo"
+                        document.getElementById("pay_due_to").innerHTML = days + "д " + hours + "ч "
+                        + minutes + "мин " + seconds + "сек ";
+
+                        // If the count down is finished, write some text
+                        if (distance < 0) {
+                            clearInterval(x);
+                            document.getElementById("pay_due_to").innerHTML = "Время истекло";
+                            $("#pay_due_to").removeClass("btn-success");
+                            $("#pay_due_to").addClass("btn-danger");
+                            $("#help_text").html("<font color='red'>Данный инвойс уже не актуален, ни в коем случае не переводите на него средства. Если у вас возникли вопросы, обращайтесь на support@btc-trade.com.ua</font>");
+
+
+                        }
+                        }, 1000);
+                }
+                if(status == "canceled"){
+                            document.getElementById("pay_due_to").innerHTML = "Время истекло";
+                            $("#pay_due_to").removeClass("btn-success");
+                            $("#pay_due_to").addClass("btn-danger");
+                            $("#help_text").html("<font color='red'>Данный инвойс уже не актуален, ни в коем случае не переводите на него средства. Если у вас возникли вопросы, обращайтесь на support@btc-trade.com.ua</font>");
+                }
+                if(status == "processed"){
+                            document.getElementById("pay_due_to").innerHTML = "Инвойс оплачен";
+                            $("#help_text").html("Инвойс оплачен, мы сообщили об этом вашему магазину, если у вас возникли еще вопросы обращайтесь на support@btc-trade.com.ua" );
+                }
+
+
+
+
+
+		var crypto_adress = {
+			"BTC": "1PK54JpVYzD89Zmn3nhEh3knbhQAjAQnFu",
+			"BCH": "1NpZgL1UMqHZp6uHNbck15p4nUZKgrUqq9",
+			"ETH": "0x4286b483856739f5e63634a21609ec8982a12f34",
+			"ETC": "0x27c6fd916ff7fd0205e82db423a9caf50b67c945"
+		};
+
+
+		var crypto_value = {
+			"BTC": "0.0001",
+			"BCH": "0.5",
+			"ETH": "0.41",
+			"ETC": "1.34"
+		};
+
+		//lang data
+		var lang_data = {
+				sum_title: {
+					EN: "Total amount:",
+					RU: "Сумма к оплате:",
+					UA: "До сплати:"
+				},
+				tip: {
+					EN: "Here you can pay, just choose in what crypto-currency:",
+					RU: "Здесь Вы можете выбрать какой криптовалютой оплатить:",
+					UA: "Тут Ви можете обрати якою криптовалютою сплатити:"
+				},
+				crp_val_title: {
+					EN: "For pay in crypto:",
+					RU: "К оплате в криптовалюте:",
+					UA: "До сплати у криптовалюті:"
+				},
+				back_to_site: {
+					EN: "Return to site",
+					RU: "Вернуться на сайт",
+					UA: "Повернутись на сайт"
+				},
+				pay: {
+					EN: "Pay",
+					RU: "Оплатить",
+					UA: "Сплатити"
+				}};
+
+		//lang selector event
+		$("#lang").change(function() {
+			let lang = $("#lang option:selected").val();
+
+			$("[lang]").attr("lang", lang);
+
+			$("[lang]").each(function() {
+				let id = $(this).attr("id");
+				let id_name = lang_data[id];
+				$(this).html(id_name[lang]);
+			});
+		});
+
+		//cryptocurrensy change
+		$("#crypto").on("click", function(){
+			$("#crypto_adress").val(crypto_adress[$(this).val()]);
+			$("#crypto_value").val(crypto_value[$(this).val()]);
+		});
+
+		//copy btn events
+		$("#copy_adr").on("click", function(){
+			$("#crypto_adress").select();
+			document.execCommand("Copy");
+		});
+		$("#copy_val").on("click", function(){
+			$("#crypto_value").select();
+			document.execCommand("Copy");
+		});
+		var key = "{{ref}}";
+		function getInvoices() {
+			$.ajax({
+				url: "/checkout_invoice_trans/",
+            	type: "POST",
+				dataType: "json",
+				data: {key_in: key},
+				cache: false,
+				success: function(resp){
+					console.log(resp);
+					var transactions = resp.transactions;
+					if ($.isEmptyObject(transactions)) {
+						$("#invoices").empty();
+						$("#invoices").append("<span>По данному инвойсу нет транзакций</span>");
+					}else {
+						$("#invoices").empty();
+						for(var i = 0; i < transactions.length; i++) {
+							$("#invoices").append("<tr id=" + i + "></tr>");
+							var trans = transactions[i];
+							$("#transactions_list th[id]").each(function(){
+								var key = this.id;
+								var value = trans[key];
+								if (key == "crypto_txid") {
+									var link = 'https://www.omniexplorer.info/search/' + value;
+									$("tr[id='" + i + "']").append("<td><a href='"+link+"'>"+value+"</a></td>");
+								} else {
+									$("tr[id='" + i + "']").append("<td>"+value+"</td>");
+								}
+							});
+						}
+					}
+				}
+			});
+		}
+		setInterval(getInvoices(), 15000);
+	</script>
+</body>
+</html>

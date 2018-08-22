@@ -1,0 +1,53 @@
+
+
+<div class="modal modal-fade" id="usd_uah_dlg" aria-labelledby="F2A">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="modal_title">Обмен USD на UAH:</h4>
+      </div>
+      
+      <div class="modal-body">
+             <div class="form-horizontal" role="form">
+
+               <div class="form-group">        
+                                        <label class="col-sm-4 control-label" for="usd_balance">Ваш баланс USD:</label>
+                                        <div class="col-sm-6">
+                                        <input type="text" disabled="" class="form-control" value="" id="usd_balance">
+                                        <span id="balance_error" class="help-block" style="color:red">У вас нет средств на счету <strong>USD</strong> для обмена</span>
+                                        </div>       
+               </div>  
+
+               <div class="form-group">        
+                                        <label class="col-sm-4 control-label" for="usd_sum"> Сумма продажи USD:</label>
+                                        <div class="col-sm-6">
+                                        <input type="text" onkeyup="exchange.usd_sum_change(this)"  class="form-control" value="" id="usd_sum">
+                                        </div>       
+               </div> 
+               <div class="form-group">        
+                                        <label class="col-sm-4 control-label" for="usd_rate">Текущий курс USD/UAH:</label>
+                                        <div class="col-sm-6">
+                                        <input type="text" disabled="" class="form-control" value="" id="usd_rate">
+                                        </div>     
+               </div>  
+               <div class="form-group">        
+                                        <label class="col-sm-4 control-label" for="uah_get">Вы получаете UAH:</label>
+                                        <div class="col-sm-6">
+                                        <input type="text" disabled="" class="form-control" value="" id="uah_get">
+                                        </div>
+               </div>       
+               <div class="form-group">        
+                               <span class="btn btn-enter pull-right" onclick="exchange.confirmation_usd_exch()">Подтвердить</span>
+
+               </div>       
+             </div>  
+     </div>
+
+
+      </div>       
+             
+    </div>
+  </div>
+</div>

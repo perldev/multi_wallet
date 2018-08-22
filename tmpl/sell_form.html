@@ -1,0 +1,177 @@
+<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+    <div class="common-block order-place-block">
+        {% if is_user %}
+        <div class="row buysell-info-row">
+            <div class="col-12">
+                Ваши средства: <strong class="cursor" style="cursor:pointer" onclick="Main.calc_straight(this)" id="your_balance_currency">{{ balance_sell }}</strong> {{ Currency }}
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                Макс. цена: <strong id='sell_max_price'></strong> {{ Currency1 }}
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-sm-right">
+                Мин. сделка:&nbsp;{{min_deal}}</span>
+            </div>
+        </div>
+        {% endif %}
+        <ul class="nav nav-tabs justify-content-between" id="sellOrderTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="sell_marketTab" data-toggle="tab" href="#sell_market" role="tab" aria-controls="sell_market" aria-selected="false">Продать {{ Currency }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="sell_simpleTab" data-toggle="tab" href="#sell_simple" role="tab" aria-controls="sell_simple" aria-selected="true">Разместить ордер {{ Currency }}</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="sellOrderTabContent">
+            <!-- first tab for simple sell orders -->
+            <div class="tab-pane fade" id="sell_simple" role="tabpanel" aria-labelledby="sell_simpleTab">
+                <div class="order-place-input-block">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-4 col-form-label">Количество</label>
+                        <div class="col-sm-8">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="sell_count" placeholder="0" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">{{ Currency }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-4 col-form-label">Цена за ед.</label>
+                        <div class="col-sm-8">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" onkeyup="Main.eq_to_usd(this, 'sell_price_usd_eq')" value="" id="sell_price" placeholder="" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">{{ Currency1 }}</span>
+                                </div>
+
+                            </div>
+                            <small class="text-muted" id="sell_price_usd_eq">0<strong>USD</strong></small>
+                        </div>
+                    </div>
+                </div>
+                <fieldset class="form-group">
+                    <div class="row">
+                        <legend class="col-form-label col-sm-4 pt-0">Всего</legend>
+                        <div class="col-sm-8">
+                            <span><span class="order-place-result" id="sell_result">0</span>{{ Currency1 }}</span><br>
+                            <span><span class="order-place-result" id="sell_result_usd_eq">0</span>USD</span><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <legend class="col-form-label col-sm-4 pt-0">Комиссия</legend>
+                        <div class="col-sm-8">
+                            <span><span class="order-place-result" id="sell_comission">0</span>{{ Currency1 }}</span><br>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group row">
+                    <div class="col-12 order-place-info">
+                        <span class="help-block" id="sell_help">Нажмите "посчитать", чтобы рассчитать сумму в соответствии с ордерами.</span>
+                    </div>
+                </div>
+                <div class="form-group row order-btns-block">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-figure-out" onclick="Main.calc_order('sell')">Посчитать</button>
+                    </div>
+                    <div class="col-6 text-right">
+                        {% if is_user %}
+                        <button type="button" class="btn btn-place-order" id="sell_button" onclick="Main.make_order_sell('{{Currency}}','{{Currency1}}')">Продать</button> {% else %}
+                        <button type="button" class="btn btn-place-order-disabled" id="sell_button" class="btn btn-success pull-right" disabled onclick="Main.make_order_sell('{{Currency}}','{{Currency1}}')">Продать</button> {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- second tab for makert sell orders -->
+            <div class="tab-pane fade show active" id="sell_market" role="tabpanel" aria-labelledby="sell_marketTab">
+                <div class="order-place-input-block">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-4 col-form-label">Количество</label>
+                        <div class="col-sm-8">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="sell_market_count" placeholder="0" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="basic-addon2">{{ Currency }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <fieldset class="form-group">
+                    <div class="row">
+                        <legend class="col-form-label col-sm-4 pt-0">Средневзвешенный курс:</legend>
+                        <div class="offset-sm-1 col-sm-7">
+                            <span><span class="order-place-result" id="sell_market_result">0</span>{{ Currency1 }}</span><br>
+                            <span><span class="order-place-result" id="sell_market_result_usd_eq">0</span>USD</span><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <legend class="col-form-label col-sm-4 pt-0">Комиссия</legend>
+                        <div class="col-sm-8">
+                            <span>&asymp;<span class="order-place-result" id="sell_market_comission">0</span>{{ Currency1 }}</span><br>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group row">
+                    <div class="col-12 order-place-info">
+                        <span class="help-block" id="sell_market_help">Нажмите "посчитать", чтобы рассчитать сумму в соответствии с ордерами.</span><br>
+                        <span class="help-block" id="sell_market_warning"></span>
+                    </div>
+                </div>
+                <div class="form-group row order-btns-block">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-figure-out" onclick="Main.calc_order_market('sell_market')">Посчитать</button>
+                    </div>
+                    <div class="col-6 text-right">
+                        {% if is_user %}
+                        <button type="button" class="btn btn-place-order" id="sell_market_button" onclick="Main.make_order_sell_market('{{Currency}}','{{Currency1}}')">Продать</button> {% else %}
+                        <button type="button" class="btn btn-place-order-disabled" id="sell_market_button" class="btn btn-success pull-right" disabled onclick="Main.make_order_sell_market('{{Currency}}','{{Currency1}}')">Продать</button> {% endif %}
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal_sell" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Добрый день, Ваш ордер покрывает больше <span id="modal_sell_percent"></span> рынка! Вы уверены что хотите провести сделку с такими параметрами:</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <legend class="col-form-label col-sm-4 pt-0">Сумма продажи</legend>
+                                    <div class="col-sm-8">
+                                        <span><span class="order-place-result" id="modal_sell_sum"></span>{{ Currency }}</span><br>
+                                    </div>
+                                </div>
+                                <fieldset class="form-group">
+                                    <div class="row">
+                                        <legend class="col-form-label col-sm-4 pt-0">Средневзвешенный курс:</legend>
+                                        <div class="offset-sm-1 col-sm-7">
+                                            <span><span class="order-place-result" id="modal_sell_disperse">0</span>{{ Currency1 }}</span><br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <legend class="col-form-label col-sm-4 pt-0">Комиссия</legend>
+                                        <div class="col-sm-8">
+                                            <span>&asymp;<span class="order-place-result" id="modal_sell_comission">0</span>{{ Currency1 }}</span><br>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <legend class="col-form-label col-sm-4 pt-0">Вы получите</legend>
+                                        <div class="col-sm-8">
+                                            <span>&asymp;<span class="order-place-result" id="modal_sell_result"></span>{{ Currency1 }}</span><br>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-figure-out" data-dismiss="modal">Отмена</button>
+                                <button type="button" id="proceed_sell" class="btn btn-place-order">Продать</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

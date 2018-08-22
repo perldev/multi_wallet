@@ -1,0 +1,98 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+
+      <div class="masthead mb-auto">
+
+      </div>
+
+      <main role="main" class="inner cover cover-for-form">
+
+        <div class="form-wrapper">
+          <h1>Авторизация BTC TRADE UA</h1>
+          <input type="hidden" value="{{post_url}}"    id="post_url" >
+
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+
+            <div class="form-wrapper-block">    
+
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="login_username" placeholder="Email">
+            <!--     <small id="emailHelp" class="form-text text-muted error-form-text">We'll never share your email with anyone else.</small> -->
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" onkeyup="Login.keyup(event)" id="login_password" placeholder="Пароль">
+              </div>
+
+              <p class="required"><label for="id_captcha">Я не робот:</label>
+                                         <p><div id="id_captcha"  class="g-recaptcha" data-sitekey="{{RECAPTCHA_PUBLIC_KEY2}}"></div>
+                 
+              <div class="registr-btn-wrapper">
+                <button type="submit" class="btn btn-enter" onclick="Login.try_login_page()">Войти</button>
+                <a  href="/forgot">Забыли пароль?</a> 
+                <a href="/registration">Регистрация</a>
+              </div>
+            </form>
+
+            </div>
+            </div>
+            </div>
+
+        </div>
+
+      </main>     
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Copyright © BTC TRADE UA 2014-2016 | All Rights Reserved</p>
+        </div>
+      </footer>
+    </div>
+
+        
+        
+
+      <!-- Example row of columns -->
+
+ 
+<!--           deals -->
+     
+<!--                 deals -->
+  
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% include "scripts.html"%}
+   
+    
+</div>
+
+{% include "g2a_modal_dlg.html"%}
+
+
+{%endblock%}
+{% block scripts %}
+
+     <script type="text/javascript">
+    
+      
+        Main.rand_key = "{{rand_key}}"                      
+      $(function() {
+        //Main.start_stock();
+        
+        
+      });
+      
+    </script>
+
+{%endblock %}
+

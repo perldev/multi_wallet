@@ -1,0 +1,36 @@
+
+
+    <header class="cd-main-header">
+        <a href="/index.html" class="cd-logo"><img src="{{STATIC_SERVER}}img2018/cd-logo.svg" class="img-fluid" alt="Logo"></a>
+        
+
+
+        <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
+
+        <nav class="cd-nav">
+            <ul class="cd-top-nav">
+                <li><a href="/stock">Торги</a></li>
+                <li><a href="http://news.btc-trade.com.ua">Новости</a></li>
+                {% if is_user %}
+                <li class="main-menu-for-desktop"><a href="/finance">Личный кабинет</a></li>  
+                <li><a   class="menu-btn-logout" href="/logout">Выйти</a></li>
+                {% else %}
+                <li><a  class="menu-btn" href="/login_page">Войти</a></li>
+                {% endif %}         
+                <li class="has-children account">
+                    <a href="#0">
+                        Помощь
+                    </a>
+
+                    <ul>
+                        <li><a href="/page/faq">FAQ</a></li>
+                        <li><a href="/page/fees">Тарифы</a></li>
+                        <li><a href="/page/mob_app">Мобильное приложение</a></li>
+                        <li><a href="/page/terms">Соглашение</a></li>
+                        <li><a href="/page/help">Документация</a></li>  
+                        <li><a href="https://docs.google.com/document/d/1ocYA0yMy_RXd561sfG3qEPZ80kyll36HUxvCRe5GbhE/edit">API</a></li>                       
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header> <!-- .cd-main-header -->

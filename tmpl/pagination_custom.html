@@ -1,0 +1,17 @@
+<div class="pagination" style="margin: 15px 25px 5px 25px;">
+     <span class="step-links">
+              <a href="?page=1">Первая</a>
+                    {% if custom_paging.prev_page %}
+                            <a href="?offset={{custom_paging.prev_offset}}&amp;page={{ custom_paging.prev_page }}">Предыдущая</a>
+                    {% endif %}
+
+                    <span class="current">
+                               Страница {{ custom_paging.current_page }}
+                    </span>
+
+                    {% if custom_paging.next_page %}
+                             <a href="?offset={{custom_paging.offset}}&amp;page={{ custom_paging.next_page }}">Следующая</a>
+                    {% endif %}
+                                                
+     </span>
+</div>

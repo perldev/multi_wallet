@@ -1,0 +1,57 @@
+
+{% extends "simple_form_main.html" %}
+
+{% load my_formats %}
+
+{% block form %}
+        
+        
+                        <div class="col-sm-10  form-title">
+                            <h1 class="page-header" style="text-align:center">{{title}}</h1>
+                        </div>
+                        <div class="col-sm-10  form-page-col">
+                                        <p class="help-block">
+                                            {% autoescape off %} 
+                                                            {{common_help_text}}
+                                            {% endautoescape %}                
+                                        </p>
+                                        {% if captcha_error %}
+                                        <div class="help-block alert alert-danger" role="alert">
+                                            Captcha говорит что вы робот
+                                        </div>  
+                                        
+                                        {% endif %}
+                                         <form class="form-horizontal" action="{{action}}" role="form" method="POST" >
+                                                {% csrf_token %}
+                                                {% include 'bs_form4.html' with form=form %}
+                                                <div class="registr-btn-wrapper">
+                                                    <button type="submit" class="btn btn-enter">{{action_title}}</button>
+                                                </div>
+                                        </form>
+                                                 
+                        </div>                                
+        
+
+ 
+
+{% endblock %}
+
+
+{% block scripts %}
+ 
+  {% if pin_load %}
+   <script>
+         
+          Pins.attach2pin("id_pin", "container_pin");
+
+   
+   </script>
+  {% endif %} 
+  {% if use_f2a %}
+   <script>
+ //DEPRECATED                          
+   </script>
+  {% endif %} 
+
+
+{% endblock %}

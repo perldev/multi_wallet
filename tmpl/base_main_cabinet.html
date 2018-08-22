@@ -1,0 +1,62 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+
+
+<div class="static-page-wrapper"> 
+
+  <main class="cd-main-content">
+    <nav class="cd-side-nav">
+    </nav>
+
+
+    <div class="container cabinet-main-container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="stock-profile-bar">
+
+          {% include "side_menu_finance.html" %}
+
+          </div>
+
+          
+          <div class="cabinet-page-title">
+            <h1>{%block cabinet_title%} {% endblock %}</h1>
+          </div>
+
+        {% if CurrencyList %}
+        <div class="currency-btn-block">
+            <div class="d-flex align-content-end flex-wrap">
+            {% for Currency in CurrencyList %}
+            {% if Currency.title == current_trade %}
+                <a href="#" id="stock_{{Currency.title}}" class="p-2 bd-highlight active-currency">{{Currency.title}}</a>
+            {% else %}
+                <a href="/finance/depmotion/{{Currency.title}}" 
+                                            id="stock_{{Currency.title}}" class="p-2 bd-highlight">{{Currency.title}}</a>
+            {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+         <div class="common-block table-list-block cabinet-table-block"> 
+            <div class="row">
+               {% block  cabinet_content %} {% endblock %}
+            </div>
+         </div>
+        </div>
+      </div>
+    </div>
+
+  </main> <!-- .cd-main-content -->
+
+  </div><!--END of MAIN WRAPPER-->  
+
+{% include "scripts.html"%}
+   
+
+
+
+{%endblock%}

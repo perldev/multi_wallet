@@ -1,0 +1,111 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+
+
+<div class="static-page-wrapper"> 
+
+  <main class="cd-main-content">
+    <nav class="cd-side-nav">
+    </nav>
+
+
+    <div class="container cabinet-main-container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="stock-profile-bar">
+
+          {% include "side_menu_finance.html" %}
+
+          </div>
+
+          <div class="cabinet-page-title">
+            <h1>Ввод/вывод средств</h1>
+          </div>
+
+        <div class="currency-btn-block">
+            <div class="d-flex align-content-end flex-wrap">
+            {% for Currency in CurrencyList %}
+            {% if Currency.title == current_trade %}
+                <a href="#" id="stock_{{Currency.title}}" class="p-2 bd-highlight active-currency">{{Currency.title}}</a>
+            {% else %}
+                <a href="/finance/depmotion/{{Currency.title}}" 
+                                            id="stock_{{Currency.title}}" class="p-2 bd-highlight">{{Currency.title}}</a>
+            {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+
+          <div class="common-block table-list-block cabinet-table-block"> 
+            <div class="row">
+
+
+              <div class="col-12">
+
+                <div class="table-responsive-sm" id="transactions_block">
+                <table class="table table-striped" id='transactions'>
+                  <thead>
+                    <tr>
+                      {% for item in TransTitle %}
+                            <th scope="col">{{item.value}}</th>
+                      {% endfor %}
+                    </tr>   
+                  </thead>
+                  <tbody>
+                    {% for item in TransList %}
+                      <tr>
+                    {% for cell in item.transes %}
+                      {% if "extended" in cell %}
+                        {%if cell.name == "order_id" %}
+                            <td>
+                              <a href="javascript:finance.show_conclusion({{cell.value}})">Сверка</a>
+                            </td>
+                        {% endif %}
+                      {% else %} 
+                      <td>{{cell|truncatechars:100}}</td>
+                      {% endif %}
+                    {% endfor %}   
+                      </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+                {% if paging %}
+                <div class="pagination" style="margin: 15px 25px 5px 10px;">
+                        <span class="step-links">
+                                {% if Trans.has_previous %}
+                                <a href="?page={{ Trans.previous_page_number }}">Предыдущая</a>
+                                {% endif %}
+
+                                <span class="current">
+                                Страница {{ Trans.number }} из {{ Trans.paginator.num_pages }}.
+                                </span>
+
+                                {% if Trans.has_next %}
+                                <a href="?page={{ Trans.next_page_number }}">Следующая</a>
+                                {% endif %}
+                        </span>
+                </div>
+                {% endif %}
+                </div>
+
+              </div>  
+
+                                                                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main> <!-- .cd-main-content -->
+
+  </div><!--END of MAIN WRAPPER-->  
+
+{% include "scripts.html"%}
+   
+
+
+
+{%endblock%}

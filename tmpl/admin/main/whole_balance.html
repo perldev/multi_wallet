@@ -1,0 +1,37 @@
+{% extends "admin/base_site.html" %}
+        {% block title %}Баланс работы системы{% endblock %}
+{% block content %} 
+ 
+<span class='btn btn-success pull-right' onclick='window.location.href=window.location.pathname+"?_="+Date()'>Reload</span>
+<h3> Балансы </h3>
+ <table class='table table-striped table-bordered table-hover table-condensed'>
+ <thead>
+ <tr>
+ <td> Валюта</td>
+ <td>Сумма внутри</td>
+ <td>Сумма внешняя</td>
+ <td>В процессе</td>
+ <td>На счетах</td>
+ <td>Займ</td>
+ <td>Консистентность(около 0)</td>
+ <td>Дельта(больше 0)</td>
+ </tr>
+ </thead>
+ <tbody>
+ {% for item in balance %}      
+      <tr>
+      <td> {{ item.currency }}</td>
+      <td>{{ item.balance_in }} </td>
+      <td> {{ item.balance_out }}</td>
+      <td> {{ item.balance_orders }}</td>
+      <td> {{ item.balance_acc }}</td>
+      <td>{{ item.balance_corr }}</td> 
+      <td> {{ item.consist }} </td>
+      <td> {{ item.delta }} </td>
+      
+      </tr> 
+ {% endfor %}
+ </tbody></table>
+ 
+ 
+{% endblock %}

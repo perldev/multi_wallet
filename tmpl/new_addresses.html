@@ -1,0 +1,10 @@
+ <div class="form-group">
+                       <textarea id="addressess" rows="5" cols="40" 
+                       style="margin: 0px; height: 217px; width: 460px;"
+                       readonly 
+                       >{{addressess}}</textarea>
+</div>
+<div class="form-group">
+    <span class="btn btn-success" onclick='$("#addressess").select();
+			document.execCommand("Copy");alert("адресса скопированы в буфер обмена")'>Скопировать</span>
+</div>

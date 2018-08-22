@@ -1,0 +1,64 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+{% load i18n %}
+{% block content %}
+
+
+
+
+  <div class="static-page-wrapper"> 
+
+  <main class="cd-main-content">
+    <nav class="cd-side-nav">
+    </nav>
+
+    <div class="static-page-intro-block">
+      <div class="container static-page-intro-container">
+        <div class="row justify-content-center">
+          <div class="col-8">
+            <h1 class="for-desktop">Справочный раздел</h1>
+            <h1 class="for-mobile">Справочный раздел</h1>
+            <span>Возник вопрос? Скорее всего ответ на него вы найдете здесь.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container static-page-content-container">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 order-md-last order-sm-first">
+          <div class="faq-right-menu">          
+          <div class="card">
+            <div class="card-header">
+              ТЕМАТИКИ
+            </div>
+            <ul class="left-faq-ul">
+            <li><a href="/page/faq">Общие вопросы</a></li>            
+            <li><a href="/page/faqcrypto">Ввод/вывод криптовалюты</a></li>   
+            <li><a href="/page/faqfiat">Ввод/вывод UAH</a></li>             
+            <!-- <li><a href="/page/faqsecure">Безопасность</a></li>  -->
+            <li><a href="/page/fees">Тарифы</a></li>
+            </ul>
+          </div>  
+          </div>        
+        </div>          
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 order-md-first order-sm-last">
+          <div class="common-block question-list-block">
+
+            {% autoescape off %} {%trans page.text %} {% endautoescape %}
+
+          </div>
+        </div>  
+
+      </div>
+    </div>
+
+  </main> <!-- .cd-main-content -->
+
+  </div><!--END of MAIN WRAPPER-->
+
+
+
+
+{%endblock%}

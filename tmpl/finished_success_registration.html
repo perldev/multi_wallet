@@ -1,0 +1,43 @@
+{% extends "base_main_cabinet.html" %}
+
+{% load my_formats %}
+
+
+{% block cabinet_title %}Активация профиля пользователя{% endblock %}
+{% block cabinet_content %}
+
+    <div class="col-sm-12 form-page-col">
+                    <p class="help-block" style="text-align: center">
+                                Ваш профиль успешно активирован, теперь вы можете начать работать на бирже.
+                    </p>
+                    <h1 class="page-header" style="text-align: center">Персональный PIN-код</h1>
+                    <p class="help-block" style="text-align: center">                                
+                                <img src="/pin_image/{{pin}}"/>
+                    </p>
+                    <div class="col-md-12 centering" style="text-align:center">
+                                <p class="help-block">Мы сгенерировали вам персональный PIN код, для того, что бы максимально 
+                                обезопасить ваши средства.
+                                    PIN-код вам необходим для вывода средств с вашего счета, как 
+                                    крипты, так  и гривны.
+                                
+                                    <strong>Сохраните PIN-код в надежном месте</strong>, желательно запишите на бумажный носитель. Временную копию пин-код мы выслали вам на ваш электронный ящик.
+                                </p>
+                                
+                                
+                            
+                                    
+                    </div>   
+    </div>
+
+   
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+{% include "scripts.html"%}
+   
+
+
+
+
+{%endblock%}
+

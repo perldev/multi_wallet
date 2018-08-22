@@ -1,0 +1,112 @@
+{% extends "base_main.html" %}
+
+{% load my_formats %}
+
+{% block content %}
+    <div class="static-page-wrapper">   
+
+    <main class="cd-main-content">
+        <nav class="cd-side-nav">
+        </nav>
+
+
+        <div class="container cabinet-main-container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="stock-profile-bar">
+
+                    {% include "side_menu_finance.html" %}
+
+                    </div>
+
+                    <div class="cabinet-page-title">
+                        <h1>История транзакций</h1>
+                    </div>
+
+                    <div class="common-block table-list-block cabinet-table-block"> 
+                        <div class="row">
+
+
+                            <div class="col-12">
+
+                                <div class="table-responsive-sm">
+                                <table class="table table-striped" id='transactions'>
+                                  <thead>
+                                    <tr>
+                                      <th scope="col" class="first-th">#</th>
+                                      <th scope="col">Тип</th>
+                                      <th scope="col">Дата</th>
+                                      <th scope="col">Сумма</th>
+                                      <th scope="col">Oписание</th>
+                                      <th scope="col">Итоговый баланс</th>    
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+
+                            {% for item in trans_list %}
+                                    <tr
+                                        {%  if item.in %}
+                                                class="success"
+                                                {% else %}
+                                                class="warning"
+                                        {% endif %}
+                                    >
+                                      <th scope="row">{{item.id}}</th>
+                                      <td>
+                                        {%  if item.in %}
+                                                Дебет
+                                                {% else %}
+                                                Кредит
+                                        {% endif %}                                     
+                                      </td>
+                                      <td>{{item.ts}}</td>
+                                      <td>
+                                            <strong>
+                                            <font {%  if item.in %} color="green" {%else%} color="red" {% endif %}>{{item.amnt}}</font>&nbsp;{{item.currency}}</strong>                                     
+                                      </td>
+                                      <td>{{item.description}}</td>
+                                      <td>{{item.res_balance}}</td>    
+                                    </tr>
+                            {% endfor %}
+
+                                  </tbody>
+                                </table>
+
+                            {% include "pagination_custom.html" %}
+
+                                </div>
+                            </div>  
+
+                                                                                                                                    
+
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </main> <!-- .cd-main-content -->
+
+    </div><!--END of MAIN WRAPPER-->    
+{%endblock%}
+
+{%block scripts %}
+<script>
+      $(function(){              
+            $("#transactions > tbody > tr").each(function(){
+                        var elem = $(this).find("td")[1];
+                        var t = parseInt(elem.innerHTML);
+                        if(t){
+                            $(elem).html(Main.format_date_time(t));}
+                        
+                        
+                        } );
+      });
+
+
+
+</script>
+
+{% endblock %}

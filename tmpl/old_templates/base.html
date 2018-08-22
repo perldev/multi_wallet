@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="author" content="">
+	<meta name="google-site-verification" content="q1fN8Twu_nTWsCybtWjtn5XUA_5V3fTC9nbJApJ6LG4" />
+	<meta name="viewport" content="width=600px, initial-scale=0.5"> 
+    <meta name="keywords" content="{{keywords}}" />
+    <meta name="description" content="{{description}}" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+    <title>{{pagetitle}} - {{title}} </title>
+
+    <meta name="viewport" content="width=600px, initial-scale=0.5">
+    <meta name="keywords" content="{{keywords}}" />
+    <meta name="description" content="{{description}}" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+    <title>{{pagetitle}} - {{title}}</title>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{STATIC_SERVER}}/css/bootstrap.css" rel="stylesheet">
+    <link href="{{STATIC_SERVER}}/css/bootstrap-table.css" rel="stylesheet">
+    
+
+    <!-- Custom CSS -->
+    <link href="{{STATIC_SERVER}}/css/style.css" rel="stylesheet">
+    <link href="{{STATIC_SERVER}}/css/non-responsive.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <!--logo section -->
+    <section class="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-sm-8">
+                    <div class="top_logo">
+                      <a href="https://bitmoney.trade"><img src="/static/images/logo.png"/></a>
+                    </div>
+                    <div class="top_stats">
+                        <div class="top_stats_block">
+                            Last Price: <strong id='stock_last_price'></strong>
+                        </div>
+                        <div class="top_stats_block">
+                            Low: <strong id='stock_min_price'></strong>
+                        </div>
+                        <div class="top_stats_block">
+                            High: <strong id='stock_max_price'></strong>
+                        </div>
+                        <div class="top_stats_block">
+                            Volume: <strong id='stock_volume'></strong>
+                        </div>
+                        <div class="top_stats_block">
+                            Server Time: <strong id='server_time'></strong>
+                        </div>
+                    </div>
+                </div>
+                
+                
+              {% include "user_block.html"%}
+                
+                
+            </div>
+        </div>
+
+    </section>
+    <!--end of top logo section -->
+
+    <!-- MAIN MENU-->
+
+
+    <section>
+        <div class="menu_back">
+            <div class="container">
+		{% include "top_menu.html" %}
+            </div>
+        </div>
+    </section>
+    <!-- END MAIN MENU-->
+
+    <!--CONTENT BLOCK-->
+    <section>
+      {% block content %} {% endblock %}
+    </section>
+    <!--END CONTENT BLOCK-->
+
+    <!--FOOTER BLOCK-->
+    <section>
+        <div class="footer_top_border"></div>
+        <div class="container">
+            <div class="col-xs-6 col-sm-6 top_logo">
+                <img src="/static/images/logo.png">
+            </div>
+            <div class="col-xs-6 col-sm-6 footer_contacts">
+                Skype: bitmoney.trade <br />
+                Email: admin@bitmoney.trade
+            </div>        
+        </div>
+    </section>
+    <!--END FOOTER BLOCK-->
+   
+
+{% include "external_script.html" %}
+{% include "scripts.html" %}
+
+{% block scripts %} {% endblock %}
+ {% include "modal_dlg.html" %}  
+
+
+
+</body>
+
+
+
+
+</html>
